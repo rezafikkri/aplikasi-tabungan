@@ -10,7 +10,7 @@
     </div><!-- /input-group -->
 
 	<div class="list-group">
-		<li class="list-group-item list-group-item-warning"><h4 class="list-group-item-heading">Daftar Anggota</h4></li>
+		<li class="list-group-item list-group-item-warning"><h4 class="list-group-item-heading">Daftar Anggota</h4><span class="badge normal">4</span></li>
 
 		<div class="loading-bg hidden"></div>
 		<div class="loading hidden"></div>

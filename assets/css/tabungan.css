@@ -8,6 +8,8 @@ body {
 
 h4.list-group-item-heading {
 	margin-bottom: 0;
+	display: inline-block;
+	margin-right: 10px;
 }
 
 h2.judul {
@@ -91,4 +93,12 @@ div.loading-bg {
 
 .mr-5 {
 	margin-right: 5px;
+}
+
+.badge.normal {
+	position: static;
+	float: none;
+	background-color: #fcf8e3;
+	border: 1px solid #946d3b;
+	color: #946d3b;
 }
