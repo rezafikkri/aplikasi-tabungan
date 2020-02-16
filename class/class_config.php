@@ -40,7 +40,7 @@ class config {
 		} else {
 			$protocol = 'http://';
 		}
-		return self::protocol().$_SERVER['HTTP_HOST']."/raport/".$uri;
+		return self::protocol().$_SERVER['HTTP_HOST']."/app_tabungan/".$uri;
 	}
 
 	public static function generate_uuid() {
