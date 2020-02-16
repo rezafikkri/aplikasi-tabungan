@@ -3,7 +3,7 @@
 
 	<a href="" class="btn btn-success mb-10 pull-right">Tambah Anggota!</a>
 	<div class="input-group search">
-		<input type="text" class="form-control" placeholder="Search for...">
+		<input type="text" class="form-control" placeholder="Nama anggota...">
 	    <span class="input-group-btn">
 	    	<button class="btn btn-success mr-5" type="button">Cari!</button>
 	    </span>
