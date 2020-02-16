@@ -5,3 +5,90 @@
 body {
 	background-color: #eff2f0;
 }
+
+h4.list-group-item-heading {
+	margin-bottom: 0;
+}
+
+h2.judul {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+a {
+	color: #333;
+}
+
+.list-group a {
+	padding-left: 20px;
+}
+
+span.badge {
+	position: absolute;
+	right: 10px;
+	top: 40%;
+}
+
+input {
+	padding: 20px !important;
+}
+
+.btn {
+	padding: 10px 10px;
+}
+
+.input-group.search {
+	margin-bottom: 10px;
+}
+
+div.list-group {
+	position: relative;
+}
+
+div.loading-bg {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: rgba(0,0,0,.5);
+	z-index: 1;
+	border-radius: 4px;
+}
+
+.loading {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	background-color: transparent;
+	border: 15px solid white;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	z-index: 2;
+	left: 50%;
+	top: 50%;
+	margin-top: -40px;
+	margin-left: -40px;
+	animation: rotation 2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(.99, .01, -.01, 1.01);;
+}
+
+@keyframes rotation {
+	0% {
+		transform: rotateZ(0deg);
+	} 50% { 
+		transform: rotateZ(180deg);
+	} 100% {
+		transform: rotateZ(360deg);
+	}
+}
+
+.mb-10 {
+	margin-bottom: 10px;
+}
+
+.mr-5 {
+	margin-right: 5px;
+}
