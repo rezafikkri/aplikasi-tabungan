@@ -96,8 +96,7 @@ div.loading-bg {
 }
 
 .badge.normal {
-	position: static;
-	float: none;
+	top: 28%;
 	background-color: #fcf8e3;
 	border: 1px solid #946d3b;
 	color: #946d3b;
