@@ -21,7 +21,8 @@ a {
 	color: #333;
 }
 
-.list-group a {
+.list-group a,
+.list-group .item-yes {
 	padding-left: 20px;
 }
 
@@ -31,8 +32,20 @@ span.badge {
 	top: 40%;
 }
 
-input {
+input,
+select {
 	padding: 20px !important;
+}
+
+select {
+	width: 100%;
+	padding: 10.6px 12px !important;
+	font-size: 14px;
+	line-height: 1.42857143;
+	color: #555;
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
 }
 
 .btn {
@@ -123,6 +136,10 @@ div.list-group {
 	margin-bottom: 10px;
 }
 
+.mb-100 {
+	margin-bottom: 100px;
+}
+
 .mr-5 {
 	margin-right: 5px;
 }
@@ -140,4 +157,28 @@ div.list-group {
 
 .panel {
 	box-shadow: none;
+}
+
+.list-group-item-default {
+	background-color: #f5f5f5;
+}
+
+.padding-l-10px {
+	padding-left: 10px !important;
+}
+
+.nopadding-l {
+	padding-left: 0;
+}
+
+.nopadding-r {
+	padding-right: 0;
+}
+
+.nopadding-all {
+	padding: 0;
+}
+
+.pr-5 {
+	padding-right: 5px;
 }

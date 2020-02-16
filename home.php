@@ -15,7 +15,7 @@
 		<div class="loading-bg hidden"></div>
 		<div class="loading hidden"></div>
 
-		<a class="list-group-item" href="#">
+		<a class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail'); ?>">
 			<h4 class="list-group-item-heading">Reza Sariful Fikri</h4> 
 			<p class="list-group-item-text">3 Januari 2020, 03:13 pm</p>
 			<span class="badge">Rp 300.000</span>
