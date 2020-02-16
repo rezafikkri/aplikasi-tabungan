@@ -1,0 +1,1 @@
+<h2 class="text-center">Aplikasi Tabungan <span class="small">v 0.1</span></h2>
