@@ -27,8 +27,9 @@
             if(!file_exists("home.php")) die ("file kosong");
             include "home.php";
             break;
-        case 'value':
-            # code...
+        case 'tambah_anggota':
+            if(!file_exists("tambah_anggota.php")) die ("file kosong");
+            include "tambah_anggota.php";
             break;
     }
 

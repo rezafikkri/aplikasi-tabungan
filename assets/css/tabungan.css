@@ -47,7 +47,7 @@ div.list-group {
 	position: relative;
 }
 
-div.loading-bg {
+.loading-bg {
 	position: absolute;
 	top: 0;
 	bottom: 0;
@@ -56,6 +56,15 @@ div.loading-bg {
 	background-color: rgba(0,0,0,.5);
 	z-index: 1;
 	border-radius: 4px;
+}
+
+.div-loading-btn {
+	display: inline-block;
+	position: relative;
+}
+
+.loading-bg.btn:hover {
+	cursor: default;
 }
 
 .loading {
@@ -74,7 +83,26 @@ div.loading-bg {
 	margin-left: -40px;
 	animation: rotation 2s;
 	animation-iteration-count: infinite;
-	animation-timing-function: cubic-bezier(.99, .01, -.01, 1.01);;
+	animation-timing-function: cubic-bezier(.99, .01, -.01, 1.01);
+}
+
+.loading-btn {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	background-color: transparent;
+	border: 5px solid white;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+	border-radius: 50%;
+	z-index: 2;
+	left: 50%;
+	top: 50%;
+	margin-top: -15px;
+	margin-left: -15px;
+	animation: rotation 2s;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(.99, .01, -.01, 1.01);
 }
 
 @keyframes rotation {
@@ -85,6 +113,10 @@ div.loading-bg {
 	} 100% {
 		transform: rotateZ(360deg);
 	}
+}
+
+.mt-30 {
+	margin-top: 30px;
 }
 
 .mb-10 {
@@ -100,4 +132,12 @@ div.loading-bg {
 	background-color: #fcf8e3;
 	border: 1px solid #946d3b;
 	color: #946d3b;
+}
+
+.panel-title {
+	font-size: 16pt;
+}
+
+.panel {
+	box-shadow: none;
 }
