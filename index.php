@@ -28,12 +28,12 @@
             include "home.php";
             break;
         case 'tambah_anggota':
-            if(!file_exists("tambah_anggota.php")) die ("file kosong");
-            include "tambah_anggota.php";
+            if(!file_exists("anggota/tambah_anggota.php")) die ("file kosong");
+            include "anggota/tambah_anggota.php";
             break;
         case 'tabungan_detail':
-            if(!file_exists("tabungan_detail.php")) die ("file kosong");
-            include "tabungan_detail.php";
+            if(!file_exists("transaksi/tabungan_detail.php")) die ("file kosong");
+            include "transaksi/tabungan_detail.php";
             break;
     }
 
