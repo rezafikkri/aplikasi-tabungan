@@ -7,9 +7,17 @@
                 <h2 class="list-group-item-heading">Reza Sariful Fikri</h2>
                 <p class="list-group-item-text mb-10">Rp 300.000</p>
                 <p class="list-group-item-text">Bergabung sejak 1 Januari 2019</p>
-                <a href="<?= config::base_url(); ?>" class="btn btn-default mt-30 padding-l-10px">Kembali!</a>
+            </li>
+            <li class="list-group-item">
+                <p class="list-group-item-text mb-10">Untuk meng-ubah Nama anggota, Masukkan Nama Lengkap anggota lalu klik tombol simpan</p>
+                <form>
+                    <label>Nama</label>
+                    <input class="form-control" type="text" name="nama" placeholder="Nama Lengkap...">
+                </form>
             </li>
         </div>
+        <a href="<?= config::base_url(); ?>" class="btn btn-default mb-20 padding-l-10px">Kembali!</a>
+        <button class="btn btn-success mb-20">Simpan!</button>
     </div>
 
     <div class="col-lg-12 nopadding-all">
