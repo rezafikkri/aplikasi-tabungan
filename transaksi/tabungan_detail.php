@@ -17,29 +17,22 @@
             <option selected="" disabled="">10</option>
         </select>
     </div>
+
     <div class="col-lg-12 nopadding-all">
-        <div class="input-group search">
+        <div class="input-group mb-10">
             <span class="input-group-addon">Rp</span>
             <input type="text" class="form-control" placeholder="Jumlah uang...">
-            <span class="input-group-btn">
-                <a class="btn btn-success" type="button">Tambah Tabungan!</a>
-            </span>
-        </div><!-- /input-group -->
-    </div>
-    <div class="col-lg-12 nopadding-all">
-        <div class="input-group search">
-            <span class="input-group-addon">Rp</span>
-            <input type="text" class="form-control" placeholder="Jumlah uang...">
-            <span class="input-group-btn">
-                <a class="btn btn-success" type="button">Ambil Tabungan!</a>
-            </span>
-        </div><!-- /input-group -->
+            <div class="input-group-btn">
+                <button class="btn btn-success">Tambah</button>
+                <button class="btn btn-success">Ambil</button>
+            </div>
+        </div>
     </div>
 
     <div class="col-lg-12 nopadding-all mb-100">
         <div class="list-group">
-             <li class="list-group-item list-group-item-default">
-                <h4 class="list-group-item-heading">Riwayat Transaksi</h4>
+             <li class="list-group-item list-group-item-warning">
+                <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal">10</span></h4>
             </li>
             <!-- List group -->
             <li class="list-group-item item-yes">
