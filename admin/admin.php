@@ -1,5 +1,6 @@
 <div class="col-lg-6 col-lg-offset-3">
 	<h2 class="judul text-center">Admin</h2>
+	<a href="<?= config::base_url(); ?>" class="btn btn-default mb-10">Kembali!</a>
 	<a href="" class="btn btn-success mb-10">Tambah Admin!</a>
 
 	<div class="list-group">

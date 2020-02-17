@@ -19,7 +19,7 @@
 	  	</div>
 	  	</form>
 	</div>
-	<a href="<?= config::base_url(); ?>" class="btn btn-default">Kembali!</a>
+	<a href="<?= config::base_url('index.php?pg=admin'); ?>" class="btn btn-default">Kembali!</a>
 	<button class="btn btn-success">Simpan!</button>
 
 	<form>
