@@ -5,12 +5,17 @@
  */
 class config {
 	private $host = "localhost",
-			$dbname = "tbungan",
+			$dbname = "tabungan",
 			$username = "root",
 			$password = "";
 	protected $db;
 	
 	function __construct() {
+		// set session
+		if(!isset($_SESSION)) {
+			session_start();
+		}
+
 		// set default time zone
 		date_default_timezone_set("Asia/Jakarta");
 
@@ -179,7 +184,7 @@ class config {
 					$cek = $this->cek_rules($data, $arrDataField['fieldForHuman'], $rule);
 					if($cek) {
 						// set session error
-						$_SESSION['RAPORT']['form_errors'][$arrDataField['realField']] = $cek;
+						$_SESSION['tabungan']['form_errors'][$arrDataField['realField']] = $cek;
 						$return = true;
 					} else {
 						$return = false;
@@ -187,11 +192,11 @@ class config {
 				}
 
 				// set session old value
-				if(isset($_SESSION['RAPORT']['form_errors']) && $old_val==true) {
+				if(isset($_SESSION['tabungan']['form_errors']) && $old_val==true) {
 					foreach($param as $field=>$rule) {
 						$arrDataField = $this->generate_realField_fieldForHuman($field);
 						$data = filter_input(INPUT_POST, $arrDataField['realField'], FILTER_SANITIZE_STRING);
-						$_SESSION['RAPORT']['old_val'][$arrDataField['realField']] = $data;
+						$_SESSION['tabungan']['old_val'][$arrDataField['realField']] = $data;
 					}
 				}
 
@@ -201,10 +206,10 @@ class config {
 
 		public function set_delimiter($delimiterOpen=null, $delimiterClose=null) {
 		    
-		    if( isset($_SESSION['RAPORT']['form_errors']) && !empty(trim($delimiterOpen)) && !empty(trim($delimiterClose)) ) {
+		    if( isset($_SESSION['tabungan']['form_errors']) && !empty(trim($delimiterOpen)) && !empty(trim($delimiterClose)) ) {
 
-		    	foreach($_SESSION['RAPORT']['form_errors'] as $key=>$val) {
-		    		$_SESSION['RAPORT']['form_errors'][$key] = $delimiterOpen.$val.$delimiterClose;
+		    	foreach($_SESSION['tabungan']['form_errors'] as $key=>$val) {
+		    		$_SESSION['tabungan']['form_errors'][$key] = $delimiterOpen.$val.$delimiterClose;
 		    	}
 
 		    	return true;
@@ -213,7 +218,7 @@ class config {
 		}
 
 		public function has_formErrors() {
-		    if(isset($_SESSION['RAPORT']['form_errors'])) {
+		    if(isset($_SESSION['tabungan']['form_errors'])) {
 		    	return true;
 		    } else {
 		    	return false;
@@ -221,9 +226,9 @@ class config {
 		}
 
 		public function get_form_errors() {
-		    if(isset($_SESSION['RAPORT']['form_errors'])) {
-		    	$errors = $_SESSION['RAPORT']['form_errors'];
-		    	unset($_SESSION['RAPORT']['form_errors']);
+		    if(isset($_SESSION['tabungan']['form_errors'])) {
+		    	$errors = $_SESSION['tabungan']['form_errors'];
+		    	unset($_SESSION['tabungan']['form_errors']);
 		    	return $errors;
 		    }
 
@@ -231,9 +236,9 @@ class config {
 		}
 
 		public function get_old_value() {
-		    if(isset($_SESSION['RAPORT']['old_val'])) {
-		    	$old_val = $_SESSION['RAPORT']['old_val'];
-		    	unset($_SESSION['RAPORT']['old_val']);
+		    if(isset($_SESSION['tabungan']['old_val'])) {
+		    	$old_val = $_SESSION['tabungan']['old_val'];
+		    	unset($_SESSION['tabungan']['old_val']);
 		    	return $old_val;
 		    }
 

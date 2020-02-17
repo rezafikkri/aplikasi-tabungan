@@ -1,4 +1,7 @@
-<?php include 'init.php'; ?>
+<?php 
+    include 'init.php';
+    $dbAnggota = new anggota;
+?>
 <!DOCTYPE html>
 <html lang="id">
   <head>
