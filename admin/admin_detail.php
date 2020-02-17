@@ -17,23 +17,19 @@
 	    	<p>Untuk konfirmasi perubahan kamu Masukkan!</p>
 	    	<input class="form-control" type="password" name="password_now" placeholder="Password Sekarang...">
 	  	</div>
-	  	<div class="panel-footer">
-	  		<a href="<?= config::base_url(); ?>" class="btn btn-default">Kembali!</a>
-	  		<button class="btn btn-success">Simpan!</button>
-	  	</div>
 	  	</form>
 	</div>
+	<a href="<?= config::base_url(); ?>" class="btn btn-default">Kembali!</a>
+	<button class="btn btn-success">Simpan!</button>
 
-	<div class="panel panel-danger">
-		<form>
+	<form>
+	<div class="panel panel-danger mt-30">
 	  	<div class="panel-body">
 	    	<label>Password</label>
 	    	<p>Jika kamu yakin untuk <strong class="text-danger">menghapus akun ini</strong>, masukkan password lalu klik hapus akun!</p>
 	    	<input class="form-control" type="password" name="password" placeholder="Password...">
 	  	</div>
-	  	<div class="panel-footer">
-	  		<button class="btn btn-danger">Hapus Akun!</button>
-	  	</div>
-	  	</form>
 	</div>
+	<button class="btn btn-danger">Hapus Akun!</button>
+	</form>
 </div>
