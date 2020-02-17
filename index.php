@@ -43,6 +43,10 @@
             if(!file_exists("admin/admin_detail.php")) die ("file kosong");
             include "admin/admin_detail.php";
             break;
+        case 'tambah_admin':
+            if(!file_exists("admin/tambah_admin.php")) die ("file kosong");
+            include "admin/tambah_admin.php";
+            break;
     }
 
     ?>
