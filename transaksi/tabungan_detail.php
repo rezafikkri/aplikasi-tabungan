@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-offset-3 mt-30">
+<div class="col-lg-6 col-lg-offset-3 mt-30">
     <h2 class="judul text-center">Detail Tabungan</h2>
 
     <div class="col-lg-12 nopadding-all">

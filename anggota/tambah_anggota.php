@@ -1,4 +1,4 @@
-<div class="col-lg-6 col-md-offset-3">
+<div class="col-lg-6 col-lg-offset-3">
 	<form>
 	<div class="panel panel-default mt-30">
 		<div class="panel-heading"><h2 class="panel-title">Tambah Anggota</h2></div>

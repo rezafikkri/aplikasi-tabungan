@@ -35,6 +35,10 @@
             if(!file_exists("transaksi/tabungan_detail.php")) die ("file kosong");
             include "transaksi/tabungan_detail.php";
             break;
+        case 'admin':
+            if(!file_exists("admin/admin.php")) die ("file kosong");
+            include "admin/admin.php";
+            break;
     }
 
     ?>

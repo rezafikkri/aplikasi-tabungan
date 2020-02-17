@@ -1,7 +1,8 @@
-<div class="col-lg-6 col-md-offset-3">
+<div class="col-lg-8 col-lg-offset-2">
 	<h2 class="judul text-center">Aplikasi Tabungan <span class="small">v 0.1</span></h2>
 
-	<a href="<?= config::base_url('index.php?pg=tambah_anggota'); ?>" class="btn btn-success mb-10 pull-right">Tambah Anggota!</a>
+	<a href="<?= config::base_url('index.php?pg=admin'); ?>" class="btn btn-default pull-right">Admin</a>
+	<a href="<?= config::base_url('index.php?pg=tambah_anggota'); ?>" class="btn btn-success mb-10 pull-right mr-5">Tambah Anggota!</a>
 	<div class="input-group search">
 		<input type="text" class="form-control" placeholder="Nama anggota...">
 	    <span class="input-group-btn">
