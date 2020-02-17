@@ -26,12 +26,23 @@ class admin extends config {
 		$nama = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
 		$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
 		$password = password_hash(filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING), PASSWORD_ARGON2I);
+		// waktu untuk keterangan waktu sebuah akun dibuat
+		$waktu = time();
 		// insert into db
-		$tambah = $this->db->prepare("INSERT INTO admin set admin_id=:admin_id, nama=:nama, username=:username, password=:password");
-		$tambah->execute(['admin_id'=>$admin_id, 'nama'=>$nama, 'username'=>$username, 'password'=>$password]);
+		$tambah = $this->db->prepare("INSERT INTO admin set admin_id=:admin_id, nama=:nama, username=:username, password=:password, waktu=:waktu");
+		$tambah->execute(['admin_id'=>$admin_id, 'nama'=>$nama, 'username'=>$username, 'password'=>$password, 'waktu'=>$waktu]);
 		if($tambah->rowCount() > 0) {
 			return true;
 		}
 		return false;
+	}
+
+	public function tampil_admin($select) {
+		$tampil = $this->db->prepare("SELECT $select FROM admin");
+		$tampil->execute();
+		while ($r=$tampil->fetch(PDO::FETCH_ASSOC)) {
+			$hasil[]=$r;
+		}
+		return @$hasil;
 	}
 }
