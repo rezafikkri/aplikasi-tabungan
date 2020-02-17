@@ -12,4 +12,8 @@ if($action === "tambah_admin") {
 		header("Location: ".config::base_url('index.php?pg=tambah_admin'));
 		die;
 	}
+
+} elseif($action === "ubah_admin") {
+	echo $dbAdmin->ubah_admin();
+	die;
 }

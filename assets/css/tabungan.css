@@ -190,3 +190,9 @@ div.list-group {
 .pr-5 {
 	padding-right: 5px;
 }
+
+.alert.fixed {
+	position: fixed;
+	right: 10px;
+	bottom: 0px;
+}
