@@ -39,6 +39,10 @@
             if(!file_exists("admin/admin.php")) die ("file kosong");
             include "admin/admin.php";
             break;
+        case 'admin_detail':
+            if(!file_exists("admin/admin_detail.php")) die ("file kosong");
+            include "admin/admin_detail.php";
+            break;
     }
 
     ?>

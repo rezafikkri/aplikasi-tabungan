@@ -136,6 +136,10 @@ div.list-group {
 	margin-bottom: 10px;
 }
 
+.mb-20 {
+	margin-bottom: 20px;
+}
+
 .mb-100 {
 	margin-bottom: 100px;
 }
@@ -153,6 +157,10 @@ div.list-group {
 
 .panel-title {
 	font-size: 16pt;
+}
+
+.panel-title.small {
+	font-size: 14pt;
 }
 
 .panel {

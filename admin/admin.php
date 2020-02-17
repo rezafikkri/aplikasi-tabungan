@@ -7,7 +7,7 @@
             <h4 class="list-group-item-heading">Admin <span class="badge normal">3</span></h4>
         </li>
 
-		<a class="list-group-item" href="">
+		<a class="list-group-item" href="<?= config::base_url('index.php?pg=admin_detail'); ?>">
 			<h4 class="list-group-item-heading">Reza Sariful Fikri</h4>
 			<p class="list-group-item-text">Bergabung sejak 3 Januari 2019</p>
 		</a>
