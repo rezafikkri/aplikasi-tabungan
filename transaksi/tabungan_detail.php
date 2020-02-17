@@ -31,7 +31,7 @@
 
     <div class="col-lg-12 nopadding-all mb-100">
         <div class="list-group">
-             <li class="list-group-item list-group-item-warning">
+            <li class="list-group-item list-group-item-warning">
                 <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal">10</span></h4>
             </li>
             <!-- List group -->
