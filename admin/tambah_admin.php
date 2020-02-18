@@ -1,4 +1,10 @@
-<?php  
+<?php
+	$dbLogin = new login;
+	if($dbLogin->cek_login_no()) { 
+		header("Location: ".config::base_url('index.php?pg=login'));
+		die;
+	}
+	  
 	$dbAdmin = new admin;
 	$errors = $dbAdmin->get_form_errors();
 	$old = $dbAdmin->get_old_value();

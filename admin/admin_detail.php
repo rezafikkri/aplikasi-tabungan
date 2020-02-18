@@ -1,4 +1,10 @@
-<?php  
+<?php
+	$dbLogin = new login;
+	if($dbLogin->cek_login_no()) { 
+		header("Location: ".config::base_url('index.php?pg=login'));
+		die;
+	}
+	  
 	$dbAdmin = new admin;
 	$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_SANITIZE_STRING);
 	$r = $dbAdmin->get_one_admin($admin_id, 'admin_id, nama, username');

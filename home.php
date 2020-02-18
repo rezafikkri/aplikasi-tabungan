@@ -1,7 +1,16 @@
+<?php  
+	$dbLogin = new login;
+	if($dbLogin->cek_login_no()) { 
+		header("Location: ".config::base_url('index.php?pg=login'));
+		die;
+	}
+?>
 <div class="col-lg-8 col-lg-offset-2">
 	<h2 class="judul text-center">Aplikasi Tabungan <span class="small">v 0.1</span></h2>
+	<p></p>
 
-	<a href="<?= config::base_url('index.php?pg=admin'); ?>" class="btn btn-default pull-right">Admin</a>
+	<a href="<?= config::base_url('login/proses.php?action=logout'); ?>" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-log-out"></span></a>
+	<a href="<?= config::base_url('index.php?pg=admin'); ?>" class="btn btn-default pull-right mr-5">Admin</a>
 	<a href="<?= config::base_url('index.php?pg=tambah_anggota'); ?>" class="btn btn-success mb-10 pull-right mr-5">Tambah Anggota!</a>
 	<div class="input-group search">
 		<input type="text" class="form-control" placeholder="Nama anggota...">

@@ -132,6 +132,14 @@ div.list-group {
 	margin-top: 30px;
 }
 
+.mt-20 {
+	margin-top: 20px;
+}
+
+.mt-10 {
+	margin-top: 10px;
+}
+
 .mb-10 {
 	margin-bottom: 10px;
 }
@@ -195,4 +203,33 @@ div.list-group {
 	position: fixed;
 	right: 10px;
 	bottom: 0px;
+}
+
+.copy-right {
+	color: #c9c9c9;
+	font-size: 10pt;
+}
+
+.login .form-control {
+  	position: relative;
+  	height: auto;
+  	font-size: 15px;
+}
+
+.login button {
+	font-size: 15px;
+}
+
+.login .form-control:focus {
+  	z-index: 2;
+}
+
+.login input[type="text"] {
+  	margin-bottom: -1px;
+  	border-bottom-right-radius: 0;
+  	border-bottom-left-radius: 0;
+}
+.login input[type="password"] {
+  	border-top-left-radius: 0;
+  	border-top-right-radius: 0;
 }

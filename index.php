@@ -50,6 +50,10 @@
             if(!file_exists("admin/tambah_admin.php")) die ("file kosong");
             include "admin/tambah_admin.php";
             break;
+        case 'login':
+            if(!file_exists("login/login.php")) die ("file kosong");
+            include "login/login.php";
+            break;
     }
 
     ?>

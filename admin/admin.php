@@ -1,4 +1,10 @@
-<?php  
+<?php
+	$dbLogin = new login;
+	if($dbLogin->cek_login_no()) { 
+		header("Location: ".config::base_url('index.php?pg=login'));
+		die;
+	}
+	  
 	$dbAdmin = new admin;
 	$admins = $dbAdmin->tampil_admin('nama, waktu, admin_id');
 ?>
@@ -17,7 +23,7 @@
         	if($admins) :
         	foreach($admins as $r) :
         ?>
-		<a class="list-group-item" href="<?= config::base_url('index.php?pg=admin_detail&admin_id='.$r['admin_id']); ?>">
+		<a class="list-group-item <?php if($r['admin_id'] === $_SESSION['tabungan']['admin_id']) echo 'active'; ?>" href="<?= config::base_url('index.php?pg=admin_detail&admin_id='.$r['admin_id']); ?>">
 			<h4 class="list-group-item-heading"><?= $r['nama']; ?></h4>
 			<p class="list-group-item-text">Bergabung sejak <?= date('d M Y, h:i a', $r['waktu']); ?></p>
 		</a>
