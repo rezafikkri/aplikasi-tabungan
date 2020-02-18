@@ -18,19 +18,19 @@
 	<div class="input-group search">
 		<input type="text" class="form-control" name="nama" placeholder="Nama anggota...">
 	    <span class="input-group-btn">
-	    	<div class="div-loading-btn">
+	    	<div class="div-loading-btn mr-5">
 				<div class="loading-bg btn hidden"></div>
 				<div class="loading-btn hidden"></div>
-				<button class="btn btn-success mr-5" id="search_anggota">Cari!</button>
+				<button class="btn btn-success" id="search_anggota">Cari!</button>
 			</div>
 	    </span>
     </div><!-- /input-group -->
 
 	<div class="list-group">
-		<li class="list-group-item list-group-item-warning"><h4 class="list-group-item-heading">Daftar Anggota</h4><span class="badge normal">4</span></li>
+		<li class="list-group-item list-group-item-warning"><h4 class="list-group-item-heading">Daftar Anggota</h4><span class="badge normal" id="jml_anggota">4</span></li>
 
-		<div class="loading-bg hidden"></div>
-		<div class="loading hidden"></div>
+		<div class="loading-bg hidden" id="loading_bg_list"></div>
+		<div class="loading hidden" id="loading_list"></div>
 
 		<daftarAnggota>
 		<?php 
@@ -46,10 +46,74 @@
 		</daftarAnggota>
 	</div>
 </div>
+<alert></alert>
 <script type="text/javascript">
 // search anggota
 const btnSearch_anggota = document.querySelector("button#search_anggota");
+const loading_btnSearch_anggota = btnSearch_anggota.previousElementSibling;
+const loading_bgSearch_anggota = loading_btnSearch_anggota.previousElementSibling;
+const loading_list = document.querySelector("div#loading_list");
+const loading_bg_list = document.querySelector('div#loading_bg_list');
 btnSearch_anggota.addEventListener('click', () => {
+	// cek apakah input ada isinya
+	const keyword = document.querySelector("input[name=nama]").value;
+	if(keyword.length === 0) return false;
+	// loading btn
+	loading_btnSearch_anggota.classList.remove('hidden');
+	loading_bgSearch_anggota.classList.remove('hidden');
+	// loading list
+	loading_list.classList.remove('hidden');
+	loading_bg_list.classList.remove('hidden');
+	
+	fetch('<?= config::base_url('anggota/proses.php?action=search_anggota'); ?>', {
+		method: "post",
+		headers: {
+			'Content-Type':'application/x-www-form-urlencoded'
+		},
+		body: `keyword=${keyword}`
+	})
+	.finally(()=> {
+		// loading btn
+		loading_btnSearch_anggota.classList.add('hidden');
+		loading_bgSearch_anggota.classList.add('hidden');
+		// loading list
+		loading_list.classList.add('hidden');
+		loading_bg_list.classList.add('hidden');
+	})
+	// handling errors
+	.then(response => {
+		if(!response.ok) {
+			// set error agar bisa ditangkap oleh catch()
+			throw new Error(response.statusText);
+		}
+		return response.json();
+	})
+	.then(response => {
+		if(response.data === "kosong") {
+			document.querySelector('daftarAnggota').innerHTML = `<li class="list-group-item"><p class="list-group-item-text">Data kosong</p>		</li>`;
+			document.querySelector('span#jml_anggota').innerHTML = 0;
+			return false;
 
+		} else {
+			const data = response.data.map(ang => `
+				<a class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='); ?>${ang.anggota_id}">
+				<h4 class="list-group-item-heading">${ang.nama}</h4>
+				<p class="list-group-item-text">Bergabung sejak ${ang.waktu}</p>
+				<span class="badge">Rp ${ang.jml_tabungan}</span>
+				</a>`).join('');
+			document.querySelector('daftarAnggota').innerHTML = data;
+			document.querySelector('span#jml_anggota').innerHTML = response.data.length;
+			return true;
+		}
+	})
+	.catch(error => {
+		console.log(error);
+		document.querySelector('alert').innerHTML = `
+		<div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Peringatan!</strong> Cek koneksi internet kamu lalu coba kembali.
+		</div>`;
+		return false;
+	});
 });
 </script>
