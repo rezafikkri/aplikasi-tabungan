@@ -45,19 +45,19 @@
 	    	<input class="form-control" type="password" name="password" placeholder="Password...">
 	  	</div>
 	</div>
-	<button class="btn btn-danger">Hapus Akun!</button>
+	<button class="btn btn-danger" id="hapus_akun">Hapus Akun!</button>
 	</form>
 </div>
 <alert></alert>
 <script type="text/javascript">
 // ubah admin
 const btnSimpan_data = document.querySelector("button#simpan_data");
-const loading = btnSimpan_data.previousElementSibling;
-const loadingBg = loading.previousElementSibling;
+const loadingUbah_admin = btnSimpan_data.previousElementSibling;
+const loadingBgUbah_admin = loadingUbah_admin.previousElementSibling;
 btnSimpan_data.addEventListener('click', () => {
 	// loading btn
-	loading.classList.remove('hidden');
-	loadingBg.classList.remove('hidden');
+	loadingUbah_admin.classList.remove('hidden');
+	loadingBgUbah_admin.classList.remove('hidden');
 	// reset ppesan
 	const ppesans = document.querySelectorAll('p.pesan');
 	ppesans.forEach((pesan) => {
@@ -79,8 +79,8 @@ btnSimpan_data.addEventListener('click', () => {
 	})
 	// ketika request selesai dijalankan maka
 	.finally(() => {
-		loading.classList.add('hidden');
-		loadingBg.classList.add('hidden');
+		loadingUbah_admin.classList.add('hidden');
+		loadingBgUbah_admin.classList.add('hidden');
 		document.querySelector('input[name=password]').value = '';
 		document.querySelector('input[name=password_now]').value = '';
 
@@ -131,4 +131,7 @@ btnSimpan_data.addEventListener('click', () => {
 		return false;
 	});
 });
+
+// hapus akun
+const btnHapus_akun = document.querySelector("button#hapus_akun");
 </script>
