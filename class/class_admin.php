@@ -11,13 +11,23 @@ class admin extends config {
 			'nama[Nama]' => 'required|maxLength[32]',
 			'username[Username]' => 'required|maxLength[32]|unique[admin.username]',
 			'password[Password]' => 'required|minLength[8]',
-			// 'password_you[Password Kamu]' => 'required'
-		], true);
-		// set delimiters
-		$this->set_delimiter('<p class="text-danger">', '</p>');
+			'password_you[Password Kamu]' => 'required'
+		], false);
+		// cek apakah password valid
+		$password_you = filter_input(INPUT_POST, 'password_you', FILTER_SANITIZE_STRING);
+		$passsworddb = $this->get_one_admin($_SESSION['tabungan']['admin_id'], 'password');
+		if($passsworddb !== null) {
+			if(!isset($_SESSION['tabungan']['form_errors']['password_you']) && !password_verify($password_you, $passsworddb['password'])) {
+				$_SESSION['tabungan']['form_errors']['password_you'] = 'Password kamu salah!';
+			}
+
+		} else {
+			return json_encode(['message'=>'kamu ilegal']);
+		}
 		// cek form errors
-		if($this->has_formErrors() === true) {
-			return false;
+		$errors = $this->get_form_errors();
+		if($errors) {
+			return json_encode(['form_errors'=>$errors]);
 		}
 
 		// buat admin id
@@ -32,9 +42,9 @@ class admin extends config {
 		$tambah = $this->db->prepare("INSERT INTO admin set admin_id=:admin_id, nama=:nama, username=:username, password=:password, waktu=:waktu");
 		$tambah->execute(['admin_id'=>$admin_id, 'nama'=>$nama, 'username'=>$username, 'password'=>$password, 'waktu'=>$waktu]);
 		if($tambah->rowCount() > 0) {
-			return true;
+			return json_encode(['success'=>'yes']);
 		}
-		return false;
+		return json_encode(['success'=>'no']);
 	}
 
 	public function get_one_admin($admin_id, $select) {

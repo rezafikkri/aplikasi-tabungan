@@ -11,11 +11,11 @@
 ?>
 <div class="col-lg-6 col-lg-offset-3 mb-100">
 	<h2 class="judul text-center">Admin Detail</h2>
+	<form id="ubah_admin">
 	<div class="panel panel-success">
 		<div class="panel-heading">
 			<h3 class="panel-title small">Informasi lengkap mengenai akun kamu</h3>
 		</div>
-		<form id="ubah_admin">
 	  	<div class="panel-body">
 	  		<input type="hidden" name="admin_id" value="<?= $r['admin_id']??''; ?>">
 	    	<label>Nama</label>
@@ -34,7 +34,6 @@
 	    	<p class="text-danger pesan" id="pesan_password_now"></p>
 	    	<input class="form-control" type="password" name="password_now" placeholder="Password Sekarang...">
 	  	</div>
-	  	</form>
 	</div>
 	<a href="<?= config::base_url('index.php?pg=admin'); ?>" class="btn btn-default">Kembali!</a>
 	<div class="div-loading-btn">
@@ -42,6 +41,7 @@
 		<div class="loading-btn hidden"></div>
 		<button class="btn btn-success" id="simpan_data">Simpan!</button>
 	</div>
+	</form>
 
 	<form>
 	<div class="panel panel-danger mt-30">
@@ -60,7 +60,9 @@
 const btnSimpan_data = document.querySelector("button#simpan_data");
 const loadingUbah_admin = btnSimpan_data.previousElementSibling;
 const loadingBgUbah_admin = loadingUbah_admin.previousElementSibling;
-btnSimpan_data.addEventListener('click', () => {
+btnSimpan_data.addEventListener('click', e => {
+	// menghapus fungsi default button
+	e.preventDefault();
 	// loading btn
 	loadingUbah_admin.classList.remove('hidden');
 	loadingBgUbah_admin.classList.remove('hidden');
