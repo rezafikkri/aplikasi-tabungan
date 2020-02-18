@@ -233,3 +233,8 @@ div.list-group {
   	border-top-left-radius: 0;
   	border-top-right-radius: 0;
 }
+
+.input-group-btn button {
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}

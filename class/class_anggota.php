@@ -18,11 +18,25 @@ class anggota extends config {
 		// ambil data
 		$nama = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
 		$anggota_id = $this->generate_uuid();
-		$tambah = $this->db->prepare("INSERT INTO anggota set anggota_id=:anggota_id, nama=:nama");
-		$tambah->execute(['anggota_id'=>$anggota_id, 'nama'=>$nama]);
+		$waktu = time();
+		$tambah = $this->db->prepare("INSERT INTO anggota set anggota_id=:anggota_id, nama=:nama, waktu=:waktu");
+		$tambah->execute(['anggota_id'=>$anggota_id, 'nama'=>$nama, 'waktu'=>$waktu]);
 		if($tambah->rowCount() > 0) {
 			return json_encode(['success'=>'yes']);
 		}
 		return json_encode(['success'=>'no']);
+	}
+
+	public function tampil_anggota($select, $where=null, $execute=null) {
+		$get = $this->db->prepare("SELECT $select from anggota $where");
+		$get->execute($execute);
+		if($get->rowCount() > 0) {
+			while ($r=$get->fetch(PDO::FETCH_ASSOC)) {
+				$hasil[]=$r;
+			}
+			return $hasil;
+		} else {
+			return null;
+		}
 	}
 }
