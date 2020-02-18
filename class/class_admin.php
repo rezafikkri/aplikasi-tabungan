@@ -37,11 +37,21 @@ class admin extends config {
 		return false;
 	}
 
+	public function get_one_admin($admin_id, $select) {
+		$get = $this->db->prepare("SELECT $select from admin where admin_id=:admin_id");
+		$get->execute(['admin_id'=>$admin_id]);
+		if($get->rowCount() > 0) {
+			return $get->fetch(PDO::FETCH_ASSOC);
+		}
+		return null;
+	}
+
 	public function ubah_admin() {
+		$admin_id = filter_input(INPUT_POST, 'admin_id', FILTER_SANITIZE_STRING);
 		// form validation
 		$this->form_validation([
 			'nama[Nama]' => 'required|maxLength[32]',
-			'username[Username]' => 'required|maxLength[32]|unique[admin.username]',
+			'username[Username]' => 'required|maxLength[32]|unique[admin.username][admin_id.'.$admin_id.']',
 			'password_now[Password Sekarang]' => 'required'
 		], false);
 		// filter min length passsword jika password ada
@@ -51,12 +61,37 @@ class admin extends config {
 				'password[Password]'=>'minLength[8]'
 			], false);
 		}
-		// set delimiters
-		$this->set_delimiter('<p class="text-danger">', '</p>');
+		// cek apakah password now valid
+		$password_now = filter_input(INPUT_POST, 'password_now', FILTER_SANITIZE_STRING);
+		$password_nowdb = $this->get_one_admin($admin_id, 'password');
+		if($password_nowdb !== null) {
+			if(!isset($_SESSION['tabungan']['form_errors']['password_now']) && !password_verify($password_now, $password_nowdb['password'])) {
+				$_SESSION['tabungan']['form_errors']['password_now'] = 'Password sekarang salah!';
+			}
+
+		} else {
+			return json_encode(['message'=>'kamu ilegal']);
+		}
 		// cek form errors
 		$errors = $this->get_form_errors();
 		if($errors) {
-			return json_encode(['form-errors'=>$errors]);
+			return json_encode(['form_errors'=>$errors]);
+		}
+
+		$nama = filter_input(INPUT_POST, 'nama', FILTER_SANITIZE_STRING);
+		$username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
+		$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+		// jika password kosong
+		if(!empty(trim($password))) {
+			$password = password_hash($password, PASSWORD_ARGON2I);
+			$ubah = $this->db->prepare("UPDATE admin set username=:username, nama=:nama, password=:password where admin_id=:admin_id");
+			$ubah->execute(['username'=>$username, 'nama'=>$nama, 'password'=>$password, 'admin_id'=>$admin_id]);
+			return json_encode(['success'=>'yes']);
+
+		} else {
+			$ubah = $this->db->prepare("UPDATE admin set username=:username, nama=:nama where admin_id=:admin_id");
+			$ubah->execute(['username'=>$username, 'nama'=>$nama, 'admin_id'=>$admin_id]);
+			return json_encode(['success'=>'yes']);
 		}
 	}
 

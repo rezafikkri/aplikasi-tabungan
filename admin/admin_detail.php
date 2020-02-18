@@ -1,5 +1,7 @@
 <?php  
 	$dbAdmin = new admin;
+	$admin_id = filter_input(INPUT_GET, 'admin_id', FILTER_SANITIZE_STRING);
+	$r = $dbAdmin->get_one_admin($admin_id, 'admin_id, nama, username');
 ?>
 <div class="col-lg-6 col-lg-offset-3 mb-100">
 	<h2 class="judul text-center">Admin Detail</h2>
@@ -9,16 +11,21 @@
 		</div>
 		<form id="ubah_admin">
 	  	<div class="panel-body">
+	  		<input type="hidden" name="admin_id" value="<?= $r['admin_id']??''; ?>">
 	    	<label>Nama</label>
-	    	<input class="form-control mb-10" type="text" name="nama" placeholder="nama...">
+	    	<p class="text-danger pesan" id="pesan_nama"></p>
+	    	<input class="form-control mb-10" type="text" name="nama" placeholder="nama..." value="<?= $r['nama']??''; ?>">
 	    	<label>Username</label>
-	    	<input class="form-control mb-10" type="text" name="username" placeholder="username...">
+	    	<p class="text-danger pesan" id="pesan_username"></p>
+	    	<input class="form-control mb-10" type="text" name="username" placeholder="username..." value="<?= $r['username']??''; ?>">
 	    	<label>Password Baru</label>
 	    	<p>Kosongkan password jika tidak ingin mengubah password!</p>
+	    	<p class="text-danger pesan" id="pesan_password"></p>
 	    	<input class="form-control mb-20" type="password" name="password" placeholder="Password Baru...">
 
 	    	<label>Password Sekarang</label>
 	    	<p>Untuk konfirmasi perubahan kamu Masukkan!</p>
+	    	<p class="text-danger pesan" id="pesan_password_now"></p>
 	    	<input class="form-control" type="password" name="password_now" placeholder="Password Sekarang...">
 	  	</div>
 	  	</form>
@@ -51,18 +58,32 @@ btnSimpan_data.addEventListener('click', () => {
 	// loading btn
 	loading.classList.remove('hidden');
 	loadingBg.classList.remove('hidden');
+	// reset ppesan
+	const ppesans = document.querySelectorAll('p.pesan');
+	ppesans.forEach((pesan) => {
+		pesan.innerText = "";
+	})
+	// ambil data form
+	const nama = document.querySelector('input[name=nama]').value;
+	const username = document.querySelector('input[name=username]').value;
+	const password = document.querySelector('input[name=password]').value;
+	const password_now = document.querySelector('input[name=password_now]').value;
+	const admin_id = document.querySelector('input[name=admin_id]').value;
 
 	fetch('<?= config::base_url(); ?>/admin/proses.php?action=ubah_admin', {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded'
 		},
-		body: `reza=reza`
+		body: `nama=${nama}&username=${username}&password=${password}&password_now=${password_now}&admin_id=${admin_id}`
 	})
 	// ketika request selesai dijalankan maka
 	.finally(() => {
 		loading.classList.add('hidden');
 		loadingBg.classList.add('hidden');
+		document.querySelector('input[name=password]').value = '';
+		document.querySelector('input[name=password_now]').value = '';
+
 	})
 	.then(response => {
 		// handling error
@@ -72,7 +93,34 @@ btnSimpan_data.addEventListener('click', () => {
 		return response.json();
 	})
 	.then(response => {
-		console.log(response);
+		// form validation
+		if(response.form_errors !== undefined) {
+			if(response.form_errors.nama != undefined) {
+				const ppesan_nama = document.querySelector('p#pesan_nama');
+				ppesan_nama.innerText = response.form_errors.nama;
+			}
+			if(response.form_errors.username != undefined) {
+				const ppesan_username = document.querySelector('p#pesan_username');
+				ppesan_username.innerText = response.form_errors.username;
+			}
+			if(response.form_errors.password != undefined) {
+				const ppesan_password = document.querySelector('p#pesan_password');
+				ppesan_password.innerText = response.form_errors.password;
+			}
+			if(response.form_errors.password_now != undefined) {
+				const ppesan_password_now = document.querySelector('p#pesan_password_now');
+				ppesan_password_now.innerText = response.form_errors.password_now;
+			}
+		return false;
+
+		} else if(response.success === "yes") {
+			document.querySelector('alert').innerHTML = `
+			<div class="alert alert-success alert-dismissible mt-30 fixed" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Selamat!</strong> Admin berhasil diedit!.
+			</div>`;
+			return true;
+		}
 	})
 	.catch(error => {
 		document.querySelector('alert').innerHTML = `
@@ -80,6 +128,7 @@ btnSimpan_data.addEventListener('click', () => {
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 			<strong>Peringatan!</strong> Cek koneksi internet kamu lalu coba kembali.
 		</div>`;
+		return false;
 	});
 });
 </script>

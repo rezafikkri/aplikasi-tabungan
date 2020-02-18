@@ -9,7 +9,7 @@
 
 	<div class="list-group">
 		<li class="list-group-item list-group-item-warning">
-            <h4 class="list-group-item-heading">Daftar Admin <span class="badge normal"><?= count($admins); ?></span></h4>
+            <h4 class="list-group-item-heading">Daftar Admin <span class="badge normal"><?= count($admins??[]); ?></span></h4>
         </li>
 
         <?php  
