@@ -34,6 +34,10 @@
             if(!file_exists("anggota/tambah_anggota.php")) die ("file kosong");
             include "anggota/tambah_anggota.php";
             break;
+        case 'detail_anggota':
+            if(!file_exists("anggota/anggota_detail.php")) die ("file kosong");
+            include "anggota/anggota_detail.php";
+            break;
         case 'tabungan_detail':
             if(!file_exists("transaksi/tabungan_detail.php")) die ("file kosong");
             include "transaksi/tabungan_detail.php";

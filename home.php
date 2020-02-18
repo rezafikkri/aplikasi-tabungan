@@ -37,11 +37,14 @@
 			if($anggota) : 
 			foreach($anggota as $r) :
 		?>
-		<a class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='.$r['anggota_id']); ?>">
+		<li class="list-group-item pl-20">
 			<h4 class="list-group-item-heading"><?= $r['nama']; ?></h4> 
 			<p class="list-group-item-text">Bergabung sejak <?= date("d M Y, h:i a", $r['waktu']); ?></p>
 			<span class="badge">Rp <?= number_format($r['jml_tabungan'],0,',','.'); ?></span>
-		</a>
+
+			<a href="<?= config::base_url('index.php?pg=detail_anggota&anggota_id='.$r['anggota_id']); ?>" class="text-info nopadding-l mt-10 display-inline-block">Detail Anggota</a>
+			<a href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='.$r['anggota_id']); ?>" class="text-info padding-l-10px display-inline-block">Transaksi</a>
+		</li>
 		<?php endforeach; endif; ?>
 		</daftarAnggota>
 	</div>
@@ -96,11 +99,14 @@ btnSearch_anggota.addEventListener('click', () => {
 
 		} else {
 			const data = response.data.map(ang => `
-				<a class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='); ?>${ang.anggota_id}">
+				<li class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='); ?>${ang.anggota_id}">
 				<h4 class="list-group-item-heading">${ang.nama}</h4>
 				<p class="list-group-item-text">Bergabung sejak ${ang.waktu}</p>
 				<span class="badge">Rp ${ang.jml_tabungan}</span>
-				</a>`).join('');
+
+				<a href="<?= config::base_url('index.php?pg=detail_anggota&anggota_id='); ?>${ang.anggota_id}" class="text-info nopadding-l mt-10 display-inline-block">Detail Anggota</a>
+				<a href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='); ?>${ang.anggota_id}" class="text-info padding-l-10px display-inline-block">Transaksi</a>
+				</li>`).join('');
 			document.querySelector('daftarAnggota').innerHTML = data;
 			document.querySelector('span#jml_anggota').innerHTML = response.data.length;
 			return true;

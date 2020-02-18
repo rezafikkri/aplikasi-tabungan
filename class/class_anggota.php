@@ -28,7 +28,7 @@ class anggota extends config {
 	}
 
 	public function tampil_anggota($select, $where=null, $execute=null) {
-		$get = $this->db->prepare("SELECT $select from anggota $where");
+		$get = $this->db->prepare("SELECT $select from anggota $where order by waktu desc");
 		$get->execute($execute);
 		if($get->rowCount() > 0) {
 			while ($r=$get->fetch(PDO::FETCH_ASSOC)) {

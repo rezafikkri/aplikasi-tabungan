@@ -1,24 +1,5 @@
 <div class="col-lg-6 col-lg-offset-3 mt-30">
-    <h2 class="judul text-center">Detail Tabungan</h2>
-
-    <div class="col-lg-12 nopadding-all">
-        <div class="list-group">
-            <li class="list-group-item list-group-item-warning">
-                <h2 class="list-group-item-heading">Reza Sariful Fikri</h2>
-                <p class="list-group-item-text mb-10">Rp 300.000</p>
-                <p class="list-group-item-text">Bergabung sejak 1 Januari 2019</p>
-            </li>
-            <li class="list-group-item">
-                <p class="list-group-item-text mb-10">Untuk meng-ubah Nama anggota, Masukkan Nama Lengkap anggota lalu klik tombol simpan</p>
-                <form>
-                    <label>Nama</label>
-                    <input class="form-control" type="text" name="nama" placeholder="Nama Lengkap...">
-                </form>
-            </li>
-        </div>
-        <a href="<?= config::base_url(); ?>" class="btn btn-default mb-20 padding-l-10px">Kembali!</a>
-        <button class="btn btn-success mb-20">Simpan!</button>
-    </div>
+    <h2 class="judul text-center">Detail Tabungan <span class="small">Reza Sariful Fikri</span></h2>
 
     <div class="col-lg-12 nopadding-all">
         <select class="mb-10">
@@ -27,7 +8,8 @@
     </div>
 
     <div class="col-lg-12 nopadding-all">
-        <div class="input-group mb-10">
+        <a href="<?= config::base_url(); ?>" class="btn btn-default pull-right">Kembali!</a>
+        <div class="input-group mb-10 pr-5">
             <span class="input-group-addon">Rp</span>
             <input type="text" class="form-control" placeholder="Jumlah uang...">
             <div class="input-group-btn">

@@ -30,7 +30,7 @@
 	    	<input class="form-control mb-20" type="password" name="password" placeholder="Password Baru...">
 
 	    	<label>Password Sekarang</label>
-	    	<p>Untuk konfirmasi perubahan kamu Masukkan!</p>
+	    	<p>Untuk konfirmasi perubahan kamu Masukkan Password!</p>
 	    	<p class="text-danger pesan" id="pesan_password_now"></p>
 	    	<input class="form-control" type="password" name="password_now" placeholder="Password Sekarang...">
 	  	</div>

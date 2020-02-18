@@ -184,7 +184,7 @@ div.list-group {
 }
 
 .nopadding-l {
-	padding-left: 0;
+	padding-left: 0 !important;
 }
 
 .nopadding-r {
@@ -197,6 +197,10 @@ div.list-group {
 
 .pr-5 {
 	padding-right: 5px;
+}
+
+.pl-20 {
+	padding-left: 20px;
 }
 
 .alert.fixed {
@@ -237,4 +241,8 @@ div.list-group {
 .input-group-btn button {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+}
+
+.display-inline-block {
+	display: inline-block;
 }
