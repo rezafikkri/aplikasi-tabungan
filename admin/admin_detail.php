@@ -156,7 +156,7 @@ btnHapus_akun.addEventListener('click', e => {
 	loadingHapus_akun.classList.remove('hidden');
 	loadingBgHapus_akun.classList.remove('hidden');
 	// reset ppesan
-	const ppesans = document.querySelectorAll('p#pesan_password_hapus_akun').innerText = "";
+	const ppesans = document.querySelector('p#pesan_password_hapus_akun').innerText = "";
 	// ambil data form
 	const password = document.querySelector("input[name=password_akun]").value;
 	const admin_id = document.querySelector("input[name=admin_id]").value;
