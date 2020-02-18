@@ -5,7 +5,7 @@
 		die;
 	}
 
-	$anggota = $dbAnggota->tampil_anggota('nama, jml_tabungan, waktu');
+	$anggota = $dbAnggota->tampil_anggota('*');
 ?>
 <div class="col-lg-8 col-lg-offset-2">
 	<h2 class="judul text-center">Aplikasi Tabungan <span class="small">v 0.1</span></h2>
@@ -37,7 +37,7 @@
 			if($anggota) : 
 			foreach($anggota as $r) :
 		?>
-		<a class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail'); ?>">
+		<a class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='.$r['anggota_id']); ?>">
 			<h4 class="list-group-item-heading"><?= $r['nama']; ?></h4> 
 			<p class="list-group-item-text">Bergabung sejak <?= date("d M Y, h:i a", $r['waktu']); ?></p>
 			<span class="badge">Rp <?= number_format($r['jml_tabungan'],0,',','.'); ?></span>
