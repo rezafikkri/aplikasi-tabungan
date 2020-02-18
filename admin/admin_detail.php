@@ -43,15 +43,20 @@
 	</div>
 	</form>
 
-	<form>
+	<form id="hapus_akun">
 	<div class="panel panel-danger mt-30">
 	  	<div class="panel-body">
 	    	<label>Password</label>
 	    	<p>Jika kamu yakin untuk <strong class="text-danger">menghapus akun ini</strong>, masukkan password lalu klik hapus akun!</p>
-	    	<input class="form-control" type="password" name="password" placeholder="Password...">
+	    	<p class="text-danger" id="pesan_password_hapus_akun"></p>
+	    	<input class="form-control" type="password" name="password_akun" placeholder="Password...">
 	  	</div>
 	</div>
-	<button class="btn btn-danger" id="hapus_akun">Hapus Akun!</button>
+	<div class="div-loading-btn">
+		<div class="loading-bg btn hidden"></div>
+		<div class="loading-btn hidden"></div>
+		<button class="btn btn-danger" id="hapus_akun">Hapus akun!</button>
+	</div>
 	</form>
 </div>
 <alert></alert>
@@ -142,4 +147,69 @@ btnSimpan_data.addEventListener('click', e => {
 
 // hapus akun
 const btnHapus_akun = document.querySelector("button#hapus_akun");
+const loadingHapus_akun = btnHapus_akun.previousElementSibling;
+const loadingBgHapus_akun = loadingHapus_akun.previousElementSibling;
+btnHapus_akun.addEventListener('click', e => {
+	// menghapus fungsi default button
+	e.preventDefault();
+	// loading btn
+	loadingHapus_akun.classList.remove('hidden');
+	loadingBgHapus_akun.classList.remove('hidden');
+	// reset ppesan
+	const ppesans = document.querySelectorAll('p#pesan_password_hapus_akun').innerText = "";
+	// ambil data form
+	const password = document.querySelector("input[name=password_akun]").value;
+	const admin_id = document.querySelector("input[name=admin_id]").value;
+
+	fetch('<?= config::base_url('admin/proses.php?action=hapus_akun'); ?>', {
+		method: "post",
+		headers: {
+			'Content-Type':'application/x-www-form-urlencoded'
+		},
+		body: `password=${password}&admin_id=${admin_id}`
+	})
+	.finally(() => {
+		// loading btn
+		loadingHapus_akun.classList.add('hidden');
+		loadingBgHapus_akun.classList.add('hidden');
+		// reset form
+		document.querySelector("form#hapus_akun").reset();
+	})
+	// handling errors
+	.then(response => {
+		if(!response.ok) {
+			throw new Error(response.statusText);
+		}
+		return response.json();
+	})
+	.then(response => {
+		if(response.form_errors !== undefined && response.form_errors.password != undefined) {
+			const ppesan_password = document.querySelector('p#pesan_password_hapus_akun');
+			ppesan_password.innerText = response.form_errors.password;
+			return false;
+
+		} else if(response.success != undefined && response.success === "yes") {
+			window.location = '<?= config::base_url('index.php?pg=login'); ?>';
+			return true;
+
+		} else if(response.success != undefined && response.success === "no") {
+			document.querySelector('alert').innerHTML = `
+			<div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<strong>Peringatan!</strong> Admin gagal dihapus!.
+			</div>`;
+			return false;
+		}
+	})
+	// proses handling errors
+	.catch(error => {
+		document.querySelector('alert').innerHTML = `
+		<div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<strong>Peringatan!</strong> Cek koneksi internet kamu lalu coba kembali!.
+		</div>`;
+		return false;
+	})
+
+});
 </script>

@@ -94,6 +94,7 @@ btnTambah_admin.addEventListener('click', e => {
 				const ppesan_password_you = document.querySelector("p#pesan_password_you");
 				ppesan_password_you.innerText = response.form_errors.password_you;
 			}
+			return false;
 
 		} else if(response.success !== undefined && response.success === "yes") {
 			document.querySelector('alert').innerHTML = `

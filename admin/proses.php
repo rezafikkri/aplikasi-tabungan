@@ -11,4 +11,8 @@ if($action === "tambah_admin") {
 } elseif($action === "ubah_admin") {
 	echo $dbAdmin->ubah_admin();
 	die;
+
+} elseif($action == "hapus_akun") {
+	echo $dbAdmin->hapus_akun();
+	die;
 }
