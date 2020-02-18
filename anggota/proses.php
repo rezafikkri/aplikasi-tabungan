@@ -27,4 +27,13 @@ if($action === "tambah_anggota") {
 			die;
 		}
 	}
+
+} else if($action === "ubah_anggota") {
+	$dbAdmin = new admin;
+	echo $dbAnggota->ubah_anggota($dbAdmin);
+	die;
+
+} else if($action === "hapus_anggota") {
+	$dbAdmin = new admin;
+	echo $dbAnggota->hapus_anggota($dbAdmin);
 }

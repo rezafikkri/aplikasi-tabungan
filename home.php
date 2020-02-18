@@ -27,7 +27,7 @@
     </div><!-- /input-group -->
 
 	<div class="list-group">
-		<li class="list-group-item list-group-item-warning"><h4 class="list-group-item-heading">Daftar Anggota</h4><span class="badge normal" id="jml_anggota">4</span></li>
+		<li class="list-group-item list-group-item-warning"><h4 class="list-group-item-heading">Daftar Anggota</h4><span class="badge normal" id="jml_anggota"><?= count($anggota??[]); ?></span></li>
 
 		<div class="loading-bg hidden" id="loading_bg_list"></div>
 		<div class="loading hidden" id="loading_list"></div>

@@ -116,7 +116,7 @@ class admin extends config {
 
 	public function hapus_akun() {
 		$this->form_validation([
-			'password[Password]' => 'required',
+			'password[Password Sekarang]' => 'required',
 		], false);
 		// cek apakah password valid
 		$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
@@ -124,7 +124,7 @@ class admin extends config {
 		$passsworddb = $this->get_one_admin($admin_id, 'password');
 		if($passsworddb !== null) {
 			if(!isset($_SESSION['tabungan']['form_errors']['password']) && !password_verify($password, $passsworddb['password'])) {
-				$_SESSION['tabungan']['form_errors']['password'] = 'Password salah!';
+				$_SESSION['tabungan']['form_errors']['password'] = 'Password Sekarang salah!';
 			}
 
 		} else {
@@ -136,8 +136,10 @@ class admin extends config {
 			return json_encode(['form_errors'=>$errors]);
 		}
 
-		$del = $this->db->prepare("DELETE from admin where admin_id=:admin_id");
-		$del->execute(['admin_id'=>$admin_id]);
+		try {
+			$del = $this->db->prepare("DELETE from admin where admin_id=:admin_id");
+			$del->execute(['admin_id'=>$admin_id]);
+		} catch (PDOException $e) {}
 		if($del->rowCount() > 0) {
 			unset($_SESSION['tabungan']);
 			return json_encode(['success'=>'yes']);

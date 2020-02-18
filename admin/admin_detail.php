@@ -46,10 +46,10 @@
 	<form id="hapus_akun">
 	<div class="panel panel-danger mt-30">
 	  	<div class="panel-body">
-	    	<label>Password</label>
+	    	<label>Password Sekarang</label>
 	    	<p>Jika kamu yakin untuk <strong class="text-danger">menghapus akun ini</strong>, masukkan password lalu klik hapus akun!</p>
 	    	<p class="text-danger" id="pesan_password_hapus_akun"></p>
-	    	<input class="form-control" type="password" name="password_akun" placeholder="Password...">
+	    	<input class="form-control" type="password" name="password_akun" placeholder="Password Sekarang...">
 	  	</div>
 	</div>
 	<div class="div-loading-btn">
@@ -130,7 +130,7 @@ btnSimpan_data.addEventListener('click', e => {
 			document.querySelector('alert').innerHTML = `
 			<div class="alert alert-success alert-dismissible mt-30 fixed" role="alert">
 				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<strong>Selamat!</strong> Admin berhasil diedit!.
+				<strong>Selamat!</strong> Admin berhasil diubah!.
 			</div>`;
 			return true;
 		}
