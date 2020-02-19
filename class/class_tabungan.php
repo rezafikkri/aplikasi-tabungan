@@ -5,7 +5,7 @@
  */
 class tabungan extends config {
 
-	public function get_one_tabungan($transaksi_id, $select) {
+	public function get_one_transaksi($transaksi_id, $select) {
 		$get = $this->db->prepare("SELECT $select from transaksi_id where transaksi_id=:transaksi_id");
 		$get->execute(['transaksi_id'=>$transaksi_id]);
 		if($get->rowCount() > 0) {
@@ -52,5 +52,15 @@ class tabungan extends config {
 		} else {
 			return json_encode(['message'=>'Kamu Ilegal']);
 		}
+	}
+
+	public function tampil_transaksi($select) {
+		$get = $this->db->prepare("SELECT $select from transaksi as t
+			JOIN admin as adn USING(admin_id) order by waktu desc");
+		$get->execute();
+		while ($r=$get->fetch(PDO::FETCH_ASSOC)) {
+			$hasil[]=$r;
+		}
+		return @$hasil;
 	}
 }

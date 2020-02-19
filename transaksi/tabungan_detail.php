@@ -3,11 +3,15 @@
     if($dbLogin->cek_login_no()) { 
         header("Location: ".config::base_url('index.php?pg=login'));
         die;
-    }  
+    } 
+    $dbTabungan = new tabungan;
+    $dbAnggota = new anggota;
     $anggota_id = filter_input(INPUT_GET, 'anggota_id', FILTER_SANITIZE_STRING);
+    $data_anggota = $dbAnggota->get_one_anggota($anggota_id, 'nama, jml_tabungan');
 ?>
 <div class="col-lg-6 col-lg-offset-3">
-    <h2 class="judul text-center">Detail Tabungan <span class="small">Reza Sariful Fikri</span></h2>
+    <h2 class="judul text-center mb-10">Detail Tabungan <span class="small"><?= $data_anggota['nama']; ?></span></h2>
+    <p class="text-center mb-30">Jumlah Tabungan <strong>Rp <?= number_format($data_anggota['jml_tabungan'],0,',','.'); ?></strong></p>
 
     <div class="col-lg-12 nopadding-all">
         <select class="mb-10">
@@ -38,16 +42,24 @@
 
     <div class="col-lg-12 nopadding-all mb-100">
         <div class="list-group">
+        <?php
+            $transaksis = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username');
+        ?>
             <li class="list-group-item list-group-item-warning">
-                <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal">10</span></h4>
+                <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal"><?= count($transaksis??[]); ?></span></h4>
             </li>
+        <?php
+            if($transaksis) :
+            foreach($transaksis as $t) :
+        ?>
             <!-- List group -->
-            <li class="list-group-item item-yes">
-                <p class="list-group-item-text mb-10">3 Januari 2020, 18:13 pm</p>
-                <p class="list-group-item-text"><strong>Aksi:</strong> Tambah Tabungan</p>
-                <p class="list-group-item-text"><strong>Oleh:</strong> reza</p>
-                <span class="badge">Rp 30.000</span>
+            <li class="list-group-item pl-20 item-hover-yes">
+                <p class="list-group-item-text mb-10"><?= date('d M Y, h:i a', $t['waktu']); ?></p>
+                <p class="list-group-item-text"><strong>Aksi:</strong> <?= ($t['type']==='add')?'Tambah Tabungan':'Ambil Tabungan'; ?></p>
+                <p class="list-group-item-text"><strong>Oleh:</strong> <?= $t['username']; ?></p>
+                <span class="badge">Rp <?= number_format($t['jml_uang'],0,',','.'); ?></span>
             </li>
+        <?php endforeach; endif; ?>
         </div>
     </div>
 </div>
