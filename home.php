@@ -99,7 +99,7 @@ btnSearch_anggota.addEventListener('click', () => {
 
 		} else {
 			const data = response.data.map(ang => `
-				<li class="list-group-item" href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='); ?>${ang.anggota_id}">
+				<li class="list-group-item pl-20" href="<?= config::base_url('index.php?pg=tabungan_detail&anggota_id='); ?>${ang.anggota_id}">
 				<h4 class="list-group-item-heading">${ang.nama}</h4>
 				<p class="list-group-item-text">Bergabung sejak ${ang.waktu}</p>
 				<span class="badge">Rp ${ang.jml_tabungan}</span>

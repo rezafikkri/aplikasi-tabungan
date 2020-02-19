@@ -1,9 +1,12 @@
-<div class="col-lg-6 col-lg-offset-3 mt-30">
+<?php  
+    $anggota_id = filter_input(INPUT_GET, 'anggota_id', FILTER_SANITIZE_STRING);
+?>
+<div class="col-lg-6 col-lg-offset-3">
     <h2 class="judul text-center">Detail Tabungan <span class="small">Reza Sariful Fikri</span></h2>
 
     <div class="col-lg-12 nopadding-all">
         <select class="mb-10">
-            <option selected="" disabled="">10</option>
+            <option selected="">10</option>
         </select>
     </div>
 
@@ -11,7 +14,8 @@
         <a href="<?= config::base_url(); ?>" class="btn btn-default pull-right">Kembali!</a>
         <div class="input-group mb-10 pr-5">
             <span class="input-group-addon">Rp</span>
-            <input type="text" class="form-control" data-jml-uang="" id="jml_uang" placeholder="Jumlah uang...">
+            <input type="text" name="jml_uang" class="form-control" data-jml-uang="" id="jml_uang" placeholder="Jumlah uang...">
+            <input type="hidden" name="anggota_id" value="<?= $anggota_id; ?>">
             <div class="input-group-btn">
                 <div class="div-loading-btn">
                     <div class="loading-bg btn hidden"></div>
@@ -57,7 +61,7 @@
         </div>
     </div>
 </div>
-
+<alert></alert>
 <script type="text/javascript">
 // generate number format
 const inputJml_uang = document.querySelector("input#jml_uang");
@@ -80,9 +84,5 @@ inputJml_uang.addEventListener('input', e => {
     e.target.value = hasil.join('');
 });
 
-// tambah tabungan
-const btnTambah_tabungan = document.querySelector("button#jml_uang");
-btnTambah_tabungan.addEventListener('click', () => {
 
-});
 </script>

@@ -14,7 +14,7 @@ if($action === "tambah_anggota") {
 		echo json_encode(['data'=>'kosong']);
 		die;
 	} else {
-		$data = $dbAnggota->tampil_anggota('*', "where nama like '$keyword%'");
+		$data = $dbAnggota->tampil_anggota('*', "where nama like :keyword", ['keyword'=>$keyword.'%']);
 		if($data) {
 			for($i=0; $i<count($data); $i++) {
 				$data[$i]['waktu'] = date("d M Y, h:i a", $data[$i]['waktu']);
