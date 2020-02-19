@@ -11,7 +11,7 @@
 ?>
 <div class="col-lg-6 col-lg-offset-3">
     <h2 class="judul text-center mb-10">Detail Tabungan <span class="small"><?= $data_anggota['nama']; ?></span></h2>
-    <p class="text-center mb-30">Jumlah Tabungan <strong>Rp <?= number_format($data_anggota['jml_tabungan'],0,',','.'); ?></strong></p>
+    <p class="text-center mb-30">Jumlah Tabungan <strong>Rp <jml_tabungan><?= number_format($data_anggota['jml_tabungan'],0,',','.'); ?></jml_tabungan></strong></p>
 
     <div class="col-lg-12 nopadding-all">
         <select class="mb-10">
@@ -49,7 +49,7 @@
             $transaksis = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', 'limit 10');
         ?>
             <li class="list-group-item list-group-item-warning">
-                <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal"><?= count($transaksis??[]); ?></span></h4>
+                <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal" id="jml_riwayat_transaksi"><?= count($transaksis??[]); ?></span></h4>
             </li>
             <div class="loading-bg hidden" id="loading_bg_list"></div>
             <div class="loading hidden" id="loading_list"></div>
@@ -136,9 +136,33 @@ btnTambah_tabungan.addEventListener('click', () => {
                 <strong>Peringatan!</strong> ${response.form_errors.jml_uang}.
             </div>`;
             return false;
+
+        } else if(response.success !== undefined && response.success === "yes" && response.data != undefined) {
+            const li = document.createElement('li');
+            const {type, waktu, oleh, jml_uang, jml_tabungan} = response.data;
+            li.classList.add('list-group-item');
+            li.classList.add('pl-20');
+            li.classList.add('item-hover-yes');
+            li.innerHTML = `<p class="list-group-item-text mb-10">${waktu}</p>
+                            <p class="list-group-item-text"><strong>Aksi:</strong> ${type}</p>
+                            <p class="list-group-item-text"><strong>Oleh:</strong> ${oleh}</p>
+                            <span class="badge">Rp ${jml_uang}</span>`;
+            const parent = document.querySelector("daftartransaksi");
+            const elSebelum = document.querySelector("li.list-group-item.pl-20");
+            // masukkan transaksi baru di list
+            parent.insertBefore(li, elSebelum);
+            // set ket jml_tabungan
+            document.querySelector('jml_tabungan').innerText = jml_tabungan;
+            // set jml riwayat
+            let jml_riwayat_transaksiNow = document.querySelector('span#jml_riwayat_transaksi').innerText;
+            document.querySelector('span#jml_riwayat_transaksi').innerText = parseInt(jml_riwayat_transaksiNow)+1;
+            // reset input
+            document.querySelector('input[name=jml_uang]').value = '';
+            return true;
         }
     })
     .catch(error => {
+        console.log(error);
         document.querySelector('alert').innerHTML = `
         <div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
