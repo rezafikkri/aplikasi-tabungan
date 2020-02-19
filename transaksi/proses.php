@@ -60,4 +60,8 @@ if($action === "tambah_tabungan") {
 		echo json_encode(['message'=>'Kamu Ilegal']);
 		die;
 	}
+
+} else if($action === "ambil_tabungan") {
+	echo $dbTabungan->ambil_tabungan($dbAnggota);
+	die;
 }

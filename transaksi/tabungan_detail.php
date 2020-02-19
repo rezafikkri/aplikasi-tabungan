@@ -99,14 +99,14 @@ const btnTambah_tabungan = document.querySelector("button#tambah_tabungan");
 const loading_btnTambah_tabungan = btnTambah_tabungan.previousElementSibling;
 const loading_bgTambah_tabungan = loading_btnTambah_tabungan.previousElementSibling;
 btnTambah_tabungan.addEventListener('click', () => {
-    // loading btn
-    loading_btnTambah_tabungan.classList.remove('hidden');
-    loading_bgTambah_tabungan.classList.remove('hidden');
-    // cek apakah data input ada
-
     // ambil data
     const jml_uang = document.querySelector('input[name=jml_uang]').dataset.jmlUang;
     const anggota_id = document.querySelector('input[name=anggota_id]').value;
+    // cek apakah data input ada
+    if(jml_uang.length === 0) return false;
+    // loading btn
+    loading_btnTambah_tabungan.classList.remove('hidden');
+    loading_bgTambah_tabungan.classList.remove('hidden');
 
     fetch('<?= config::base_url('transaksi/proses.php?action=tambah_tabungan'); ?>', {
         method: "post",
@@ -156,8 +156,9 @@ btnTambah_tabungan.addEventListener('click', () => {
             // set jml riwayat
             let jml_riwayat_transaksiNow = document.querySelector('span#jml_riwayat_transaksi').innerText;
             document.querySelector('span#jml_riwayat_transaksi').innerText = parseInt(jml_riwayat_transaksiNow)+1;
-            // reset input
+            // reset input dan data set
             document.querySelector('input[name=jml_uang]').value = '';
+            document.querySelector('input[name=jml_uang]').dataset.jmlUang = '';
             return true;
         }
     })
@@ -231,6 +232,62 @@ selectTampil_transaksi.addEventListener('change', e => {
         }
     })
     .catch(error => {
+        document.querySelector('alert').innerHTML = `
+        <div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Peringatan!</strong> Cek koneksi internet kamu lalu coba kembali.
+        </div>`;
+        return false;
+    });
+});
+
+// ambil tabungan
+const btnAmbil_tabungan = document.querySelector("button#ambil_tabungan");
+const loading_btnAmbil_tabungan = btnTambah_tabungan.previousElementSibling;
+const loading_bgAmbil_tabungan = loading_btnAmbil_tabungan.previousElementSibling;
+btnAmbil_tabungan.addEventListener('click', () => {
+    // ambil data
+    const jml_uang = document.querySelector('input[name=jml_uang]').dataset.jmlUang;
+    const anggota_id = document.querySelector('input[name=anggota_id]').value;
+    // cek apakah data input ada
+    if(jml_uang.length === 0) return false;
+    // loading btn
+    loading_btnAmbil_tabungan.classList.remove('hidden');
+    loading_bgAmbil_tabungan.classList.remove('hidden');
+
+    fetch('<?= config::base_url('transaksi/proses.php?action=ambil_tabungan'); ?>', {
+        method: "post",
+        headers: {
+            'Content-Type':'application/x-www-form-urlencoded'
+        },
+        body: `jml_uang=${jml_uang}&anggota_id=${anggota_id}`
+    })
+    .finally(() => {
+        // loading btn
+        loading_btnAmbil_tabungan.classList.add('hidden');
+        loading_bgAmbil_tabungan.classList.add('hidden');
+    })
+    // handling errors
+    .then(response => {
+        if(!response.ok) {
+            throw new Error(response.statusText);
+        }
+        return response.json();
+    })
+    .then(response => {
+        if(response.form_errors !== undefined && response.form_errors.jml_uang !== undefined) {
+            document.querySelector('alert').innerHTML = `
+            <div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Peringatan!</strong> ${response.form_errors.jml_uang}.
+            </div>`;
+            return false;
+
+        }
+
+    })
+    .catch(error => {
+        console.log(error);
         document.querySelector('alert').innerHTML = `
         <div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>

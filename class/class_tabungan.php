@@ -54,6 +54,33 @@ class tabungan extends config {
 		}
 	}
 
+	public function ambil_tabungan($dbAnggota) {
+		// form validation
+		$this->form_validation([
+			'jml_uang[Jumlah Uang]' => 'required|integer'
+		], false);
+		// form errors
+		$errors = $this->get_form_errors();
+		if($errors) {
+			return json_encode(['form_errors'=>$errors]);
+		}
+
+		$jml_uang = filter_input(INPUT_POST, 'jml_uang', FILTER_SANITIZE_STRING);
+		$anggota_id = filter_input(INPUT_POST, 'anggota_id', FILTER_SANITIZE_STRING);
+
+		// get jml_tabungan sekarang
+		$data_anggota = $dbAnggota->get_one_anggota($anggota_id, 'jml_tabungan, nama');
+		if($data_anggota !== null) {
+			// cek apakah jml_uang yang ingin di ambil melebihi jml_tabungan
+			if($jml_uang > $data_anggota['jml_tabungan']) {
+				return json_encode(['form_errors'=>['jml_uang'=>'Jumlah uang yang ingin kamu ambil melebihi Jumlah tabunganmu']]);
+			}
+
+		} else {
+			return json_encode(['message'=>'Kamu ilegal']);
+		}
+	}
+
 	public function tampil_transaksi($select, $limit=null) {
 		$get = $this->db->prepare("SELECT $select from transaksi as t
 			JOIN admin as adn USING(admin_id) order by waktu desc $limit");
