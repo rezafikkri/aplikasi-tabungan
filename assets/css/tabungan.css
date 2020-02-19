@@ -261,3 +261,7 @@ div.list-group {
 .border-radius-0 {
 	border-radius: 0;
 }
+
+.alert {
+	z-index: 9999;
+}

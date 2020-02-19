@@ -14,11 +14,11 @@
     <p class="text-center mb-30">Jumlah Tabungan <strong>Rp <jml_tabungan><?= number_format($data_anggota['jml_tabungan'],0,',','.'); ?></jml_tabungan></strong></p>
 
     <div class="col-lg-12 nopadding-all">
-        <select class="mb-10">
+        <select class="mb-10" name="tampil_transaksi">
             <option selected="" value="10">10</option>
-            <option value="10">20</option>
-            <option value="10">40</option>
-            <option value="all">Semua</option>
+            <option value="20">20</option>
+            <option value="40">40</option>
+            <option value="semua">Semua</option>
         </select>
     </div>
 
@@ -162,7 +162,75 @@ btnTambah_tabungan.addEventListener('click', () => {
         }
     })
     .catch(error => {
-        console.log(error);
+        document.querySelector('alert').innerHTML = `
+        <div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Peringatan!</strong> Cek koneksi internet kamu lalu coba kembali.
+        </div>`;
+        return false;
+    });
+});
+
+// tampil transaksi
+const selectTampil_transaksi = document.querySelector("select[name=tampil_transaksi]");
+const loading_bg_list = document.querySelector("div#loading_bg_list");
+const loading_list = document.querySelector("div#loading_list");
+selectTampil_transaksi.addEventListener('change', e => {
+    // loading list
+    loading_bg_list.classList.remove('hidden');
+    loading_list.classList.remove('hidden');
+    // ambil data
+    const limit = e.target.value;
+    const anggota_id = document.querySelector("input[name=anggota_id]").value;
+    
+    fetch('<?= config::base_url('transaksi/proses.php?action=tampil_transaksi'); ?>', {
+        method: "post",
+        headers: {
+            'Content-Type':'application/x-www-form-urlencoded'
+        },
+        body: `limit=${limit}&anggota_id=${anggota_id}`
+    })
+    .finally(() => {
+        // loading list
+        loading_bg_list.classList.add('hidden');
+        loading_list.classList.add('hidden');
+    })
+    // handling errors
+    .then(response => {
+        if(!response.ok) {
+            // set error agar bisa ditangkap oleh catch()
+            throw new Error(response.statusText);
+        }
+        return response.json();
+    })
+    .then(response => {
+        if(response.form_errors !== undefined && response.form_errors.limit !== undefined) {
+            document.querySelector('alert').innerHTML = `
+            <div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <strong>Peringatan!</strong> ${response.form_errors.limit}.
+            </div>`;
+            return false;
+
+        } else if(response.success !== undefined && response.success === "yes" && response.data !== undefined && response.jml_data !== undefined) {
+            const hasil = response.data.map(tran => {
+                return `<li class="list-group-item pl-20 item-hover-yes">
+                    <p class="list-group-item-text mb-10">${tran.waktu}</p>
+                    <p class="list-group-item-text"><strong>Aksi:</strong> ${tran.type}</p>
+                    <p class="list-group-item-text"><strong>Oleh:</strong> ${tran.username}</p>
+                    <span class="badge">Rp ${tran.jml_uang}</span>
+                </li>`;
+            }).join('');
+            document.querySelector('daftartransaksi').innerHTML = hasil;
+            
+            // set ket jml_tabungan
+            document.querySelector('jml_tabungan').innerText = response.jml_tabungan;
+            // set jml riwayat
+            document.querySelector('span#jml_riwayat_transaksi').innerText = response.jml_data;
+            return true;
+        }
+    })
+    .catch(error => {
         document.querySelector('alert').innerHTML = `
         <div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
