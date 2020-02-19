@@ -113,7 +113,6 @@ btnSearch_anggota.addEventListener('click', () => {
 		}
 	})
 	.catch(error => {
-		console.log(error);
 		document.querySelector('alert').innerHTML = `
 		<div class="alert alert-warning alert-dismissible mt-30 fixed" role="alert">
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
