@@ -4,10 +4,10 @@
  * 
  */
 class config {
-	private $host = "localhost",
-			$dbname = "tabungan",
-			$username = "root",
-			$password = "";
+	private $host = "localhost", // host
+			$dbname = "tabungan", // database
+			$username = "root", // username
+			$password = ""; // password
 	protected $db;
 	
 	function __construct() {

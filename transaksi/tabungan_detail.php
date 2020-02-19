@@ -11,10 +11,18 @@
         <a href="<?= config::base_url(); ?>" class="btn btn-default pull-right">Kembali!</a>
         <div class="input-group mb-10 pr-5">
             <span class="input-group-addon">Rp</span>
-            <input type="text" class="form-control" placeholder="Jumlah uang...">
+            <input type="text" class="form-control" data-jml-uang="" id="jml_uang" placeholder="Jumlah uang...">
             <div class="input-group-btn">
-                <button class="btn btn-success">Tambah</button>
-                <button class="btn btn-success">Ambil</button>
+                <div class="div-loading-btn">
+                    <div class="loading-bg btn hidden"></div>
+                    <div class="loading-btn hidden"></div>
+                    <button class="btn btn-success border-radius-0" id="tambah_tabungan">Tambah</button>
+                </div>
+                <div class="div-loading-btn">
+                    <div class="loading-bg btn hidden"></div>
+                    <div class="loading-btn hidden"></div>
+                    <button class="btn btn-success" id="ambil_tabungan">Ambil</button>
+                </div>
             </div>
         </div>
     </div>
@@ -49,3 +57,32 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+// generate number format
+const inputJml_uang = document.querySelector("input#jml_uang");
+inputJml_uang.addEventListener('input', e => {
+    let hasil = [];
+    let penentu = 3;
+    const angka = e.target.value.replace(/\./g, '');
+    // set angka asli ke object dataset
+    e.target.dataset.jmlUang = angka;
+    // number format
+    angka.split('').reverse().forEach((angka, i) => {
+        if(i === penentu) {
+            hasil.unshift(`${angka}.`);
+            penentu += 3;
+        } else {
+            hasil.unshift(angka);
+        }
+    });
+    // set hasil number format di input value
+    e.target.value = hasil.join('');
+});
+
+// tambah tabungan
+const btnTambah_tabungan = document.querySelector("button#jml_uang");
+btnTambah_tabungan.addEventListener('click', () => {
+
+});
+</script>

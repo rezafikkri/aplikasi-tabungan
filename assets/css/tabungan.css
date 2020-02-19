@@ -243,6 +243,14 @@ div.list-group {
 	border-bottom-left-radius: 0;
 }
 
+.input-group-btn.div-loading-btn button:hover {
+	z-index: 999 !important;
+}
+
 .display-inline-block {
 	display: inline-block;
+}
+
+.border-radius-0 {
+	border-radius: 0;
 }
