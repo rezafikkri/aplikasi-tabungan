@@ -15,7 +15,10 @@
 
     <div class="col-lg-12 nopadding-all">
         <select class="mb-10">
-            <option selected="">10</option>
+            <option selected="" value="10">10</option>
+            <option value="10">20</option>
+            <option value="10">40</option>
+            <option value="all">Semua</option>
         </select>
     </div>
 
@@ -43,11 +46,15 @@
     <div class="col-lg-12 nopadding-all mb-100">
         <div class="list-group">
         <?php
-            $transaksis = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username');
+            $transaksis = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', 'limit 10');
         ?>
             <li class="list-group-item list-group-item-warning">
                 <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal"><?= count($transaksis??[]); ?></span></h4>
             </li>
+            <div class="loading-bg hidden" id="loading_bg_list"></div>
+            <div class="loading hidden" id="loading_list"></div>
+
+            <daftartransaksi>
         <?php
             if($transaksis) :
             foreach($transaksis as $t) :
@@ -60,6 +67,7 @@
                 <span class="badge">Rp <?= number_format($t['jml_uang'],0,',','.'); ?></span>
             </li>
         <?php endforeach; endif; ?>
+            </daftartransaksi>
         </div>
     </div>
 </div>

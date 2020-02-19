@@ -54,9 +54,9 @@ class tabungan extends config {
 		}
 	}
 
-	public function tampil_transaksi($select) {
+	public function tampil_transaksi($select, $limit=null) {
 		$get = $this->db->prepare("SELECT $select from transaksi as t
-			JOIN admin as adn USING(admin_id) order by waktu desc");
+			JOIN admin as adn USING(admin_id) order by waktu desc $limit");
 		$get->execute();
 		while ($r=$get->fetch(PDO::FETCH_ASSOC)) {
 			$hasil[]=$r;
