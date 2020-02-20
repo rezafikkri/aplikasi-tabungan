@@ -3,6 +3,8 @@ Assalamualaikum Warohmatullahi Wabarokatuh
 
 Hallo aplikasi ini adalah implementasi dari hasil pembelajaran saya mengenai Modern Javascript, seperti fungsi pengganti ajax di Jquery yaitu **fetch()**, ada juga **Destructuring**, **Arrow Function**, **Errors Handling pada fungsi fetch()**, dll. dan juga implementasi dari hasil pembelajaran saya mengenai GIT Version Control System. Saya mempelajari semua itu di chanel youtube **Web Programming Unpas**, saya sangat berterima kasih sekali kepada Pak Sandika Galih karena telah berbagi ilmunya.
 
+**Note : Butuh PHP version 7.2 keatas**
+
 ### Apakah aplikasi ini gratis?
 Aplikasi ini gratis untuk dipelajari dijadikan referensi atau dikembangkan, tidak gratis jika aplikasi diperjual belikan, tapi jika kamu telah mengembangkan-nya maka dipersilahkan untuk menjualnya namun harus tetap menyertakan sumbernya.
 
