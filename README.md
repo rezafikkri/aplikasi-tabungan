@@ -1,7 +1,7 @@
 # Aplikasi Tabungan ![downloads](https://img.shields.io/badge/Version-0.1-brightgreen)
-Assalamualaikum Warohmatullahi Wabarokatuh
+Assalamualaikum Warohmatullohi Wabarokatuh
 
-Hallo aplikasi ini adalah implementasi dari hasil pembelajaran saya mengenai Modern Javascript, seperti fungsi pengganti ajax di Jquery yaitu **fetch()**, ada juga **Destructuring**, **Arrow Function**, **Errors Handling pada fungsi fetch()**, dll. dan juga implementasi dari hasil pembelajaran saya mengenai GIT Version Control System. Saya mempelajari semua itu di chanel youtube **Web Programming Unpas**, saya sangat berterima kasih sekali kepada Pak Sandika Galih karena telah berbagi ilmunya.
+Halo aplikasi ini adalah implementasi dari hasil pembelajaran saya mengenai Modern Javascript, seperti fungsi pengganti ajax di Jquery yaitu **fetch()**, ada juga **Destructuring**, **Arrow Function**, **Errors Handling pada fungsi fetch()**, dll. dan juga implementasi dari hasil pembelajaran saya mengenai GIT Version Control System. Saya mempelajari semua itu di chanel youtube **Web Programming Unpas**, saya sangat berterima kasih sekali kepada Pak Sandika Galih karena telah berbagi ilmunya.
 
 **Note : Butuh PHP version 7.2 keatas**
 
