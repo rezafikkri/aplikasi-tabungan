@@ -30,8 +30,8 @@ if($action === "tambah_tabungan") {
 		return $data;
 	}
 
-	$limit = filter_input(INPUT_POST, 'limit', FILTER_SANITIZE_STRING);
-	$anggota_id = filter_input(INPUT_POST, 'anggota_id', FILTER_SANITIZE_STRING);
+	$limit = filter_input(INPUT_GET, 'limit', FILTER_SANITIZE_STRING);
+	$anggota_id = filter_input(INPUT_GET, 'anggota_id', FILTER_SANITIZE_STRING);
 	$data_anggota = $dbAnggota->get_one_anggota($anggota_id, 'jml_tabungan');
 	if($data_anggota !== null) {
 

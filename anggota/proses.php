@@ -9,7 +9,7 @@ if($action === "tambah_anggota") {
 	die;
 
 } else if($action == "search_anggota") {
-	$keyword = filter_input(INPUT_POST, 'keyword', FILTER_SANITIZE_STRING);
+	$keyword = filter_input(INPUT_GET, 'keyword', FILTER_SANITIZE_STRING);
 	if(empty(trim($keyword))) {
 		echo json_encode(['data'=>'kosong']);
 		die;

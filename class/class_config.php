@@ -181,6 +181,7 @@ class config {
 				foreach($param as $field=>$rule) {
 					$arrDataField = $this->generate_realField_fieldForHuman($field);
 					$data = filter_input(INPUT_POST, $arrDataField['realField'], FILTER_SANITIZE_STRING);
+					if($data === null) $data = filter_input(INPUT_GET, $arrDataField['realField'], FILTER_SANITIZE_STRING);
 
 					// jika data tidak valid
 					$cek = $this->cek_rules($data, $arrDataField['fieldForHuman'], $rule);

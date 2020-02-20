@@ -186,13 +186,7 @@ selectTampil_transaksi.addEventListener('change', e => {
     const limit = e.target.value;
     const anggota_id = document.querySelector("input[name=anggota_id]").value;
     
-    fetch('<?= config::base_url('transaksi/proses.php?action=tampil_transaksi'); ?>', {
-        method: "post",
-        headers: {
-            'Content-Type':'application/x-www-form-urlencoded'
-        },
-        body: `limit=${limit}&anggota_id=${anggota_id}`
-    })
+    fetch(`<?= config::base_url('transaksi/proses.php?action=tampil_transaksi'); ?>&limit=${limit}&anggota_id=${anggota_id}`)
     .finally(() => {
         // loading list
         loading_bg_list.classList.add('hidden');

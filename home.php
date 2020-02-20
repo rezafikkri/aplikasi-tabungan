@@ -69,13 +69,7 @@ btnSearch_anggota.addEventListener('click', () => {
 	loading_list.classList.remove('hidden');
 	loading_bg_list.classList.remove('hidden');
 	
-	fetch('<?= config::base_url('anggota/proses.php?action=search_anggota'); ?>', {
-		method: "post",
-		headers: {
-			'Content-Type':'application/x-www-form-urlencoded'
-		},
-		body: `keyword=${keyword}`
-	})
+	fetch(`<?= config::base_url('anggota/proses.php?action=search_anggota&keyword='); ?>${keyword}`)
 	.finally(()=> {
 		// loading btn
 		loading_btnSearch_anggota.classList.add('hidden');
