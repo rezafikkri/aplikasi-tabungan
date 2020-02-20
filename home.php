@@ -7,7 +7,7 @@
 
 	$anggota = $dbAnggota->tampil_anggota('*');
 ?>
-<div class="col-lg-8 col-lg-offset-2">
+<div class="col-lg-8 col-lg-offset-2 mb-100">
 	<h2 class="judul text-center">Aplikasi Tabungan <span class="small">v 0.1</span></h2>
 	<p></p>
 
