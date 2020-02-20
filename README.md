@@ -13,7 +13,7 @@ Aplikasi ini gratis untuk dipelajari dijadikan referensi atau dikembangkan, tida
 	**Tambah tabungan
 	**Ambil tabungan
 	**dan salah satu fitur yang saya suka yaitu *live number format* pada fitur *Tambah tabungan* dan *Ambil tabungan*
-4. 90 ajax dengan fungsi fetch()
+4. 90% ajax dengan fungsi fetch()
 5. Form validation
 
 ## Teknologi apa saja yang digunakan?
