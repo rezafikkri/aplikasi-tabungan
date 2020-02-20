@@ -283,6 +283,29 @@ btnAmbil_tabungan.addEventListener('click', () => {
             </div>`;
             return false;
 
+        } else if(response.success !== undefined && response.success === "yes" && response.data != undefined) {
+            const li = document.createElement('li');
+            const {type, waktu, oleh, jml_uang, jml_tabungan} = response.data;
+            li.classList.add('list-group-item');
+            li.classList.add('pl-20');
+            li.classList.add('item-hover-yes');
+            li.innerHTML = `<p class="list-group-item-text mb-10">${waktu}</p>
+                            <p class="list-group-item-text"><strong>Aksi:</strong> ${type}</p>
+                            <p class="list-group-item-text"><strong>Oleh:</strong> ${oleh}</p>
+                            <span class="badge">Rp ${jml_uang}</span>`;
+            const parent = document.querySelector("daftartransaksi");
+            const elSebelum = document.querySelector("li.list-group-item.pl-20");
+            // masukkan transaksi baru di list
+            parent.insertBefore(li, elSebelum);
+            // set ket jml_tabungan
+            document.querySelector('jml_tabungan').innerText = jml_tabungan;
+            // set jml riwayat
+            let jml_riwayat_transaksiNow = document.querySelector('span#jml_riwayat_transaksi').innerText;
+            document.querySelector('span#jml_riwayat_transaksi').innerText = parseInt(jml_riwayat_transaksiNow)+1;
+            // reset input dan data set
+            document.querySelector('input[name=jml_uang]').value = '';
+            document.querySelector('input[name=jml_uang]').dataset.jmlUang = '';
+            return true;
         }
 
     })

@@ -75,6 +75,23 @@ class tabungan extends config {
 			if($jml_uang > $data_anggota['jml_tabungan']) {
 				return json_encode(['form_errors'=>['jml_uang'=>'Jumlah uang yang ingin kamu ambil melebihi Jumlah tabunganmu']]);
 			}
+			// insert into transaksi
+			$transaksi_id = $this->generate_uuid();
+			$insert = $this->db->prepare("INSERT INTO transaksi set transaksi_id=:transaksi_id, admin_id=:admin_id, anggota_id=:anggota_id, type='get', jml_uang=:jml_uang, waktu=:waktu");
+			$insert->execute(['transaksi_id'=>$transaksi_id, 'admin_id'=>$_SESSION['tabungan']['admin_id'], 'anggota_id'=>$anggota_id, 'jml_uang'=>$jml_uang, 'waktu'=>time()]);
+			// update jml_tabungan anggota
+			$jml_tabunganNew = $data_anggota['jml_tabungan']-$jml_uang;
+			$upJmlTbAng = $this->db->prepare("UPDATE anggota set jml_tabungan=:jml_tabungan where anggota_id=:anggota_id");
+			$upJmlTbAng->execute(['jml_tabungan'=>$jml_tabunganNew, 'anggota_id'=>$anggota_id]);
+
+			return json_encode(['success'=>'yes', 'data'=>[
+				'type'=>'Ambil Tabungan', 
+				'jml_uang'=>number_format($jml_uang,0,',','.'), 
+				'jml_tabungan'=>number_format($jml_tabunganNew,0,',','.'), 
+				'nama_anggota'=>$data_anggota['nama'],
+				'waktu'=>date('d M Y, h:i a', time()),
+				'oleh'=>$_SESSION['tabungan']['username']
+			]]);
 
 		} else {
 			return json_encode(['message'=>'Kamu ilegal']);
