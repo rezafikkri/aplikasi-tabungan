@@ -28,6 +28,12 @@ Aplikasi ini gratis untuk dipelajari dijadikan referensi atau dikembangkan, tida
 6. GIT Version Control System
 7. Jquery
 
+### Install
+1. Clone repository ke folder htdocs or download zip &raquo; extrak dan pastekan ke folder htdocs
+2. Buka phpmyadmin &raquo; buat database **raport**
+3. Export database tabungan.sql
+4. Buka aplikasi dengan alamat `http://localhost/app_tabungan`
+
 ### Info login
 Admin 
 
