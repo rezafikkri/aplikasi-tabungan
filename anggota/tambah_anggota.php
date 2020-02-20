@@ -22,6 +22,8 @@
 		<button class="btn btn-success" id="tambah_anggota">Tambah Anggota!</button>
 	</div>
 	</form>
+
+	<p class="copy-right mt-20">Copyright &copy; Reza Sariful Fikri. All Right Reserved</p>
 </div>
 <alert></alert>
 <script type="text/javascript">

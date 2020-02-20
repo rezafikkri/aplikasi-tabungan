@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div class="col-lg-12 nopadding-all mb-100">
+    <div class="col-lg-12 nopadding-all">
         <div class="list-group">
         <?php
             $transaksis = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', $anggota_id, 'limit 10');
@@ -70,6 +70,8 @@
             </daftartransaksi>
         </div>
     </div>
+
+    <p class="copy-right mt-20 mb-100">Copyright &copy; Reza Sariful Fikri. All Right Reserved</p>
 </div>
 <alert></alert>
 <script type="text/javascript">

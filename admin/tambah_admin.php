@@ -33,6 +33,8 @@
 		<button class="btn btn-success" id="tambah_admin">Simpan!</button>
 	</div>
 	</form>
+
+	<p class="copy-right mt-20 mb-100">Copyright &copy; Reza Sariful Fikri. All Right Reserved</p>
 </div>
 <alert></alert>
 <script type="text/javascript">

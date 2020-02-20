@@ -58,6 +58,8 @@
 		<button class="btn btn-danger" id="hapus_akun">Hapus akun!</button>
 	</div>
 	</form>
+
+	<p class="copy-right mt-20 mb-100">Copyright &copy; Reza Sariful Fikri. All Right Reserved</p>
 </div>
 <alert></alert>
 <script type="text/javascript">

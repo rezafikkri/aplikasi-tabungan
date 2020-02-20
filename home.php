@@ -48,6 +48,7 @@
 		<?php endforeach; endif; ?>
 		</daftarAnggota>
 	</div>
+	<p class="copy-right mt-20">Copyright &copy; Reza Sariful Fikri. All Right Reserved</p>
 </div>
 <alert></alert>
 <script type="text/javascript">
