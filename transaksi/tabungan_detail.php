@@ -46,7 +46,7 @@
     <div class="col-lg-12 nopadding-all mb-100">
         <div class="list-group">
         <?php
-            $transaksis = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', 'limit 10');
+            $transaksis = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', $anggota_id, 'limit 10');
         ?>
             <li class="list-group-item list-group-item-warning">
                 <h4 class="list-group-item-heading">Riwayat Transaksi <span class="badge normal" id="jml_riwayat_transaksi"><?= count($transaksis??[]); ?></span></h4>
@@ -229,6 +229,12 @@ selectTampil_transaksi.addEventListener('change', e => {
             // set jml riwayat
             document.querySelector('span#jml_riwayat_transaksi').innerText = response.jml_data;
             return true;
+
+        } else if(response.success !== undefined && response.success === "no") {
+            document.querySelector('daftartransaksi').innerHTML = `<li class="list-group-item pl-20 item-hover-yes">
+                    <p class="list-group-item-text">Data kosong</p>
+                </li>`;
+                return false;
         }
     })
     .catch(error => {
@@ -243,7 +249,7 @@ selectTampil_transaksi.addEventListener('change', e => {
 
 // ambil tabungan
 const btnAmbil_tabungan = document.querySelector("button#ambil_tabungan");
-const loading_btnAmbil_tabungan = btnTambah_tabungan.previousElementSibling;
+const loading_btnAmbil_tabungan = btnAmbil_tabungan.previousElementSibling;
 const loading_bgAmbil_tabungan = loading_btnAmbil_tabungan.previousElementSibling;
 btnAmbil_tabungan.addEventListener('click', () => {
     // ambil data

@@ -36,24 +36,26 @@ if($action === "tambah_tabungan") {
 	if($data_anggota !== null) {
 
 		if($limit === "semua") {
-			$data = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username');
+			$data = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', $anggota_id);
 			// jika data ada
 			if($data) {
 				$data = remake_data($data);
+				echo json_encode([ 'success'=>'yes', 'data'=>$data, 'jml_data'=>count($data??[]), 'jml_tabungan'=>number_format($data_anggota['jml_tabungan'],0,',','.') ]);
+				die;
+			} else {
+				echo json_encode(['success'=>'no']);
 			}
-
-			echo json_encode([ 'success'=>'yes', 'data'=>$data, 'jml_data'=>count($data??[]), 'jml_tabungan'=>number_format($data_anggota['jml_tabungan'],0,',','.') ]);
-			die;
-
+			
 		} else {
-			$data = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', 'limit '.$limit);
+			$data = $dbTabungan->tampil_transaksi('t.jml_uang, t.waktu, t.type, t.waktu, adn.username', $anggota_id, 'limit '.$limit);
 			// jika data ada
 			if($data) {
 				$data = remake_data($data);
+				echo json_encode([ 'success'=>'yes', 'data'=>$data, 'jml_data'=>count($data??[]), 'jml_tabungan'=>number_format($data_anggota['jml_tabungan'],0,',','.') ]);
+				die;
+			} else {
+				echo json_encode(['success'=>'no']);
 			}
-
-			echo json_encode([ 'success'=>'yes', 'data'=>$data, 'jml_data'=>count($data??[]), 'jml_tabungan'=>number_format($data_anggota['jml_tabungan'],0,',','.') ]);
-			die;
 		}
 
 	} else {

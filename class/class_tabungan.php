@@ -71,6 +71,10 @@ class tabungan extends config {
 		// get jml_tabungan sekarang
 		$data_anggota = $dbAnggota->get_one_anggota($anggota_id, 'jml_tabungan, nama');
 		if($data_anggota !== null) {
+			// cek apakah jml_tabungan masih kosong
+			if($data_anggota['jml_tabungan'] == 0) {
+				return json_encode(['form_errors'=>['jml_uang'=>'Tabunganmu masih kosong']]);
+			}
 			// cek apakah jml_uang yang ingin di ambil melebihi jml_tabungan
 			if($jml_uang > $data_anggota['jml_tabungan']) {
 				return json_encode(['form_errors'=>['jml_uang'=>'Jumlah uang yang ingin kamu ambil melebihi Jumlah tabunganmu']]);
@@ -98,10 +102,12 @@ class tabungan extends config {
 		}
 	}
 
-	public function tampil_transaksi($select, $limit=null) {
+	public function tampil_transaksi($select, $anggota_id, $limit=null) {
 		$get = $this->db->prepare("SELECT $select from transaksi as t
-			JOIN admin as adn USING(admin_id) order by waktu desc $limit");
-		$get->execute();
+			JOIN admin as adn USING(admin_id) 
+			where anggota_id=:anggota_id 
+			order by waktu desc $limit");
+		$get->execute(['anggota_id'=>$anggota_id]);
 		while ($r=$get->fetch(PDO::FETCH_ASSOC)) {
 			$hasil[]=$r;
 		}
