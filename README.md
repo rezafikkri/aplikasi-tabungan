@@ -33,6 +33,7 @@ Aplikasi ini gratis untuk dipelajari dijadikan referensi atau dikembangkan, tida
 2. Buka phpmyadmin &raquo; buat database **raport**
 3. Export database tabungan.sql
 4. Buka aplikasi dengan alamat `http://localhost/app_tabungan`
+5. Selamat aplikasi selesai diinstall.
 
 ### Info login
 Admin 
