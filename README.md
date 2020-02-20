@@ -8,12 +8,12 @@ Aplikasi ini gratis untuk dipelajari dijadikan referensi atau dikembangkan, tida
 
 ### Apa saja fiturnya?
 1. Management anggota
-	-Search anggota
+	- Search anggota
 2. Management admin
 3. Management transaksi 
-	-Tambah tabungan
-	-Ambil tabungan
-	-dan salah satu fitur yang saya suka yaitu *live number format* pada fitur *Tambah tabungan* dan *Ambil tabungan*
+	- Tambah tabungan
+	- Ambil tabungan
+	- dan salah satu fitur yang saya suka yaitu *live number format* pada fitur *Tambah tabungan* dan *Ambil tabungan*
 4. 90% ajax dengan fungsi **fetch()**
 5. Form validation
 
