@@ -16,6 +16,8 @@ class config {
 			session_start();
 		}
 
+		ob_start();
+
 		// set default time zone
 		date_default_timezone_set("Asia/Jakarta");
 
