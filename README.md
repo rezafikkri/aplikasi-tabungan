@@ -41,4 +41,3 @@ Admin
 **No**|**Username**|**Password**
 :----:|:----:|:----:
 1|reza|reza1234
-2|hati|hati1234
