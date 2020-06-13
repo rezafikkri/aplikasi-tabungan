@@ -41,8 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`admin_id`, `nama`, `password`, `username`, `waktu`) VALUES
-('1234re43', 'Reza Sariful Fikri', '$argon2i$v=19$m=65536,t=4,p=1$Q2g3SjF4L2liYzFoL1luWg$MvZzrFDtuh+37+ES374IDSpORxSFx7lJy0aBlZttCj0', 'reza', 1582157318),
-('6fc1531825679c52', 'Hati Murdani', '$argon2i$v=19$m=65536,t=4,p=1$NUhab09CenFpbExpSUpuYg$/XtiwxVgkuqx8PtL3X0keYANC/ZS+AW0+jv9NsLOVME', 'hati', 1582157549);
+('1234re43', 'Reza Sariful Fikri', '$argon2i$v=19$m=65536,t=4,p=1$Q2g3SjF4L2liYzFoL1luWg$MvZzrFDtuh+37+ES374IDSpORxSFx7lJy0aBlZttCj0', 'reza', 1582157318);
 
 -- --------------------------------------------------------
 
