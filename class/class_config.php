@@ -28,7 +28,7 @@ class config {
 			return true;
 		} catch (PDOException $e) {
 			echo "gagal konek ".$e->getMessage();
-			return false;
+			die;
 		}
 	}
 
@@ -47,7 +47,7 @@ class config {
 		} else {
 			$protocol = 'http://';
 		}
-		return self::protocol().$_SERVER['HTTP_HOST']."/app_tabungan/".$uri;
+		return self::protocol().$_SERVER['HTTP_HOST']."/aplikasi-tabungan/".$uri;
 	}
 
 	public static function generate_uuid() {
